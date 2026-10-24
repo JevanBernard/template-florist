@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<!--
+  CHECKLIST SAAT PAKAI UNTUK KLIEN (cari kata "contoh" / "Contoh" / "00"):
+  1. Nomor WA: Find & Replace 6281234567890 dan "+62 812-3456-7890" (juga konstanta BIZ di <script> paling bawah).
+  2. Alamat, jam buka, IG/TikTok, nama usaha, harga, nama produk, foto produk ASLI (ganti src + alt).
+  3. <title>, meta description, canonical, og:*, JSON-LD di <head> -> isi data asli. Hapus meta robots noindex saat go-live.
+  4. Hapus #demoNote di footer. Jangan menambah rating/jumlah pelanggan/ulasan kecuali klien punya buktinya.
+  5. File ini memakai CSS hasil kompilasi (tanpa CDN). Untuk mengubah desain, edit florist-demo.html lalu kompilasi ulang.
+-->
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Florist Denpasar | Buket, Bunga Papan &amp; Same-Day Delivery | Denpasar Bloom Atelier</title>
+<meta name="description" content="Florist di Denpasar, Bali: hand bouquet, bunga papan, standing flower, dan bunga meja. Pesan lewat WhatsApp, antar ke Denpasar, Sanur, Renon, Kuta, Seminyak, dan Canggu, atau ambil di studio.">
+<meta name="theme-color" content="#4E7356">
+<!-- DEMO: HAPUS baris robots di bawah saat website dipublikasikan untuk klien -->
+<meta name="robots" content="noindex, nofollow">
+<!-- GANTI dengan domain asli klien -->
+<link rel="canonical" href="https://contoh-domain.id/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="Denpasar Bloom Atelier">
+<meta property="og:title" content="Florist Denpasar | Buket, Bunga Papan &amp; Same-Day Delivery">
+<meta property="og:description" content="Florist di Denpasar, Bali: hand bouquet, bunga papan, standing flower, dan bunga meja. Pesan lewat WhatsApp, antar ke Denpasar, Sanur, Renon, Kuta, Seminyak, dan Canggu, atau ambil di studio.">
+<script>(function(){var r=document.documentElement;r.classList.add("js","icons-wait");var d=function(){r.classList.remove("icons-wait")};var t=setTimeout(d,3000);window.addEventListener("load",function(){if(document.fonts&&document.fonts.load){document.fonts.load('24px "Material Symbols Outlined"').then(function(){clearTimeout(t);d()},d)}else{d()}})})();</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&amp;display=swap" rel="stylesheet">
+<style>
+/* ===== Dasar & responsif ===== */
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; -webkit-text-size-adjust: 100%; }
+body { overflow-x: clip; }
+img { background: linear-gradient(135deg, #ffdadb 0%, #ecdcff 50%, #c3edc9 100%); }
+img.img-fallback { visibility: hidden; }
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Ikon: jangan tampilkan teks ligature mentah saat font belum siap */
+.material-symbols-outlined { width: 1em; height: 1em; overflow: hidden; flex-shrink: 0; }
+.icons-wait .material-symbols-outlined { visibility: hidden; }
+
+/* Input >=16px di HP supaya iOS tidak zoom otomatis saat fokus */
+@media (max-width: 767px) {
+  #planner-section input, #planner-section select, #planner-section textarea { font-size: 16px; }
+}
+
+/* ===== Header & menu mobile ===== */
+#siteHeader.is-scrolled { box-shadow: 0 8px 28px rgba(78, 115, 86, 0.14); }
+.nav-link.is-active { background: #4e7356; color: #fff; font-weight: 700; box-shadow: 0 4px 14px rgba(78, 115, 86, 0.18); }
+.mobile-menu { opacity: 0; visibility: hidden; transform: translateY(-10px); transition: opacity .25s ease, transform .25s ease, visibility .25s; }
+.mobile-menu.open { opacity: 1; visibility: visible; transform: none; }
+.m-link.is-active { background: #c3edc9; color: #00210d; font-weight: 700; }
+.menu-scrim { opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility .25s; }
+.menu-scrim.open { opacity: 1; visibility: visible; }
+
+/* ===== Animasi masuk saat scroll (ceria, tapi ringan) ===== */
+@keyframes reveal-up    { from { opacity: 0; transform: translate3d(0, 28px, 0); } to { opacity: 1; transform: none; } }
+@keyframes reveal-left  { from { opacity: 0; transform: translate3d(-40px, 0, 0); } to { opacity: 1; transform: none; } }
+@keyframes reveal-right { from { opacity: 0; transform: translate3d(40px, 0, 0); } to { opacity: 1; transform: none; } }
+@keyframes reveal-zoom  { from { opacity: 0; transform: scale(.9) translate3d(0, 18px, 0); } to { opacity: 1; transform: none; } }
+@keyframes pop          { 0% { transform: scale(.55); } 60% { transform: scale(1.14); } 100% { transform: scale(1); } }
+@keyframes float        { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes drift        { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(28px, 22px, 0) scale(1.08); } }
+@keyframes petal-fall   { 0% { transform: translate3d(0, -40px, 0) rotate(0deg); opacity: 0; } 10% { opacity: .75; } 90% { opacity: .75; } 100% { transform: translate3d(60px, 760px, 0) rotate(300deg); opacity: 0; } }
+@keyframes faq-in       { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@keyframes bubble-flash { 0% { background-color: rgba(78, 115, 86, .18); } 100% { background-color: transparent; } }
+
+/* Sebelum JS jalan, elemen reveal disembunyikan HANYA jika JS aktif (class .js dipasang di <head>) */
+.js [data-reveal], .js [data-stagger] > * { opacity: 0; }
+.js .is-visible { opacity: 1; animation: reveal-up .8s cubic-bezier(.22, 1, .36, 1) var(--rd, 0ms) backwards; }
+.js .is-visible[data-reveal="left"]  { animation-name: reveal-left; }
+.js .is-visible[data-reveal="right"] { animation-name: reveal-right; }
+.js .is-visible[data-reveal="zoom"]  { animation-name: reveal-zoom; }
+/* geser kiri/kanan hanya di layar lebar supaya tidak memicu scroll horizontal di HP */
+@media (max-width: 1023px) {
+  .js .is-visible[data-reveal="left"], .js .is-visible[data-reveal="right"] { animation-name: reveal-up; }
+}
+.js .is-visible .step-icon { animation: pop .7s cubic-bezier(.34, 1.56, .64, 1) calc(var(--rd, 0ms) + 250ms) backwards; }
+.product-item.is-pop { animation: reveal-zoom .5s cubic-bezier(.22, 1, .36, 1) backwards; }
+
+/* Gerak dekoratif */
+.anim-float   { animation: float 5.5s ease-in-out infinite; }
+.anim-float-2 { animation: float 6.5s ease-in-out -2.2s infinite; }
+.blob-drift   { animation: drift 16s ease-in-out infinite alternate; }
+.petal { position: absolute; top: 0; font-size: 22px; line-height: 1; opacity: 0; will-change: transform; animation: petal-fall 15s linear infinite; }
+
+/* FAQ: tanpa JS semua jawaban terlihat (bagus untuk crawler); dengan JS jadi accordion */
+.js .faq-content { display: none; }
+.js .faq-item.open .faq-content { display: block; animation: faq-in .35s ease; }
+.faq-item.open .faq-icon { transform: rotate(180deg); }
+.bubble-flash { animation: bubble-flash .7s ease-out; }
+
+/* Hormati preferensi "kurangi gerakan" */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-reveal], .js [data-stagger] > * { opacity: 1 !important; }
+  .js .is-visible, .js .is-visible .step-icon, .product-item.is-pop { animation: none !important; }
+  .anim-float, .anim-float-2, .blob-drift, .petal, .bubble-flash, .faq-item.open .faq-content { animation: none !important; }
+  .petal { display: none; }
+}
+</style><style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.pointer-events-none{pointer-events:none}.visible{visibility:visible}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0}.-left-20{left:-5rem}.-right-24{right:-6rem}.-top-24{top:-6rem}.bottom-3{bottom:.75rem}.bottom-\[calc\(1rem\+env\(safe-area-inset-bottom\)\)\]{bottom:calc(1rem + env(safe-area-inset-bottom))}.left-0{left:0}.left-2{left:.5rem}.left-3{left:.75rem}.right-0{right:0}.right-3{right:.75rem}.right-4{right:1rem}.top-0{top:0}.top-1\/3{top:33.333333%}.top-16{top:4rem}.top-2{top:.5rem}.top-3{top:.75rem}.top-4{top:1rem}.z-10{z-index:10}.z-30{z-index:30}.z-40{z-index:40}.z-50{z-index:50}.col-span-12{grid-column:span 12/span 12}.mx-auto{margin-left:auto;margin-right:auto}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-space-xl{margin-top:2.5rem}.line-clamp-3{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.table{display:table}.grid{display:grid}.hidden{display:none}.h-10{height:2.5rem}.h-11{height:2.75rem}.h-12{height:3rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-2{height:.5rem}.h-24{height:6rem}.h-3{height:.75rem}.h-40{height:10rem}.h-64{height:16rem}.h-8{height:2rem}.h-80{height:20rem}.h-9{height:2.25rem}.h-96{height:24rem}.h-full{height:100%}.min-h-\[26rem\]{min-height:26rem}.min-h-\[40px\]{min-height:40px}.min-h-\[44px\]{min-height:44px}.min-h-\[48px\]{min-height:48px}.min-h-\[56px\]{min-height:56px}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-2{width:.5rem}.w-3{width:.75rem}.w-8{width:2rem}.w-80{width:20rem}.w-9{width:2.25rem}.w-96{width:24rem}.w-auto{width:auto}.w-full{width:100%}.min-w-0{min-width:0}.max-w-2xl{max-width:42rem}.max-w-7xl{max-width:80rem}.max-w-\[calc\(100\%-1rem\)\]{max-width:calc(100% - 1rem)}.max-w-sm{max-width:24rem}.max-w-xl{max-width:36rem}.flex-shrink{flex-shrink:1}.shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes ping{75%,to{transform:scale(2);opacity:0}}.animate-ping{animation:ping 1s cubic-bezier(0,0,.2,1) infinite}.resize-none{resize:none}.resize{resize:both}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-space-lg{gap:1.5rem}.gap-space-md{gap:1rem}.gap-space-sm{gap:.5rem}.gap-space-xl{gap:2.5rem}.gap-x-2{-moz-column-gap:.5rem;column-gap:.5rem}.gap-x-3{-moz-column-gap:.75rem;column-gap:.75rem}.gap-x-4{-moz-column-gap:1rem;column-gap:1rem}.gap-y-1{row-gap:.25rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-2\.5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.625rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.625rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.space-y-space-2xl>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(4rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(4rem*var(--tw-space-y-reverse))}.space-y-space-lg>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem*var(--tw-space-y-reverse))}.space-y-space-md>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.space-y-space-xl>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2.5rem*var(--tw-space-y-reverse))}.self-end{align-self:flex-end}.self-center{align-self:center}.overflow-hidden,.truncate{overflow:hidden}.truncate{text-overflow:ellipsis;white-space:nowrap}.whitespace-pre-wrap{white-space:pre-wrap}.break-words{overflow-wrap:break-word}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:2rem}.rounded-xl{border-radius:3rem}.rounded-b-3xl{border-bottom-right-radius:1.5rem;border-bottom-left-radius:1.5rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-outline-variant\/30{border-color:hsla(100,8%,77%,.3)}.border-primary-fixed{--tw-border-opacity:1;border-color:rgb(195 237 201/var(--tw-border-opacity,1))}.border-secondary-fixed{--tw-border-opacity:1;border-color:rgb(255 218 219/var(--tw-border-opacity,1))}.border-surface-container{--tw-border-opacity:1;border-color:rgb(240 237 234/var(--tw-border-opacity,1))}.bg-\[\#dcf8c6\]{--tw-bg-opacity:1;background-color:rgb(220 248 198/var(--tw-bg-opacity,1))}.bg-emerald-100{--tw-bg-opacity:1;background-color:rgb(209 250 229/var(--tw-bg-opacity,1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129/var(--tw-bg-opacity,1))}.bg-on-background\/25{background-color:rgba(27,28,26,.25)}.bg-primary{--tw-bg-opacity:1;background-color:rgb(54 90 63/var(--tw-bg-opacity,1))}.bg-primary-container{--tw-bg-opacity:1;background-color:rgb(78 115 86/var(--tw-bg-opacity,1))}.bg-primary-fixed{--tw-bg-opacity:1;background-color:rgb(195 237 201/var(--tw-bg-opacity,1))}.bg-primary-fixed\/40{background-color:rgba(195,237,201,.4)}.bg-primary\/10{background-color:rgba(54,90,63,.1)}.bg-primary\/40{background-color:rgba(54,90,63,.4)}.bg-secondary{--tw-bg-opacity:1;background-color:rgb(144 73 81/var(--tw-bg-opacity,1))}.bg-secondary-fixed{--tw-bg-opacity:1;background-color:rgb(255 218 219/var(--tw-bg-opacity,1))}.bg-secondary-fixed\/40{background-color:rgba(255,218,219,.4)}.bg-secondary-fixed\/50{background-color:rgba(255,218,219,.5)}.bg-surface{--tw-bg-opacity:1;background-color:rgb(252 249 246/var(--tw-bg-opacity,1))}.bg-surface-container{--tw-bg-opacity:1;background-color:rgb(240 237 234/var(--tw-bg-opacity,1))}.bg-surface-container-high{--tw-bg-opacity:1;background-color:rgb(234 232 229/var(--tw-bg-opacity,1))}.bg-surface-container-highest{--tw-bg-opacity:1;background-color:rgb(229 226 223/var(--tw-bg-opacity,1))}.bg-surface-container-low{--tw-bg-opacity:1;background-color:rgb(246 243 240/var(--tw-bg-opacity,1))}.bg-surface-container-lowest{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-surface-container-lowest\/80{background-color:hsla(0,0%,100%,.8)}.bg-surface-container-lowest\/90{background-color:hsla(0,0%,100%,.9)}.bg-surface-container-lowest\/95{background-color:hsla(0,0%,100%,.95)}.bg-surface-container\/60{background-color:hsla(30,17%,93%,.6)}.bg-surface-variant{--tw-bg-opacity:1;background-color:rgb(229 226 223/var(--tw-bg-opacity,1))}.bg-surface\/85{background-color:hsla(30,50%,98%,.85)}.bg-surface\/95{background-color:hsla(30,50%,98%,.95)}.bg-tertiary-fixed{--tw-bg-opacity:1;background-color:rgb(236 220 255/var(--tw-bg-opacity,1))}.bg-gradient-to-b{background-image:linear-gradient(to bottom,var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}.bg-gradient-to-t{background-image:linear-gradient(to top,var(--tw-gradient-stops))}.from-on-background\/70{--tw-gradient-from:rgba(27,28,26,.7) var(--tw-gradient-from-position);--tw-gradient-to:rgba(27,28,26,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-secondary-fixed{--tw-gradient-from:#ffdadb var(--tw-gradient-from-position);--tw-gradient-to:rgba(255,218,219,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.from-surface{--tw-gradient-from:#fcf9f6 var(--tw-gradient-from-position);--tw-gradient-to:hsla(30,50%,98%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}.via-primary-fixed{--tw-gradient-to:rgba(195,237,201,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#c3edc9 var(--tw-gradient-via-position),var(--tw-gradient-to)}.via-surface-container-low{--tw-gradient-to:hsla(30,25%,95%,0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),#f6f3f0 var(--tw-gradient-via-position),var(--tw-gradient-to)}.via-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from),transparent var(--tw-gradient-via-position),var(--tw-gradient-to)}.to-secondary-fixed{--tw-gradient-to:#ffdadb var(--tw-gradient-to-position)}.to-surface{--tw-gradient-to:#fcf9f6 var(--tw-gradient-to-position)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.bg-cover{background-size:cover}.bg-center{background-position:50%}.object-contain{-o-object-fit:contain;object-fit:contain}.object-cover{-o-object-fit:cover;object-fit:cover}.p-1\.5{padding:.375rem}.p-2\.5{padding:.625rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-3\.5{padding-left:.875rem;padding-right:.875rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-margin-mobile{padding-left:1.25rem;padding-right:1.25rem}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-3\.5{padding-top:.875rem;padding-bottom:.875rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-28{padding-bottom:7rem}.pb-3{padding-bottom:.75rem}.pb-5{padding-bottom:1.25rem}.pt-1{padding-top:.25rem}.pt-16{padding-top:4rem}.pt-2{padding-top:.5rem}.pt-3{padding-top:.75rem}.pt-4{padding-top:1rem}.pt-6{padding-top:1.5rem}.pt-space-md{padding-top:1rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-body-lg,.font-body-md,.font-body-sm{font-family:Plus Jakarta Sans}.font-headline-lg,.font-headline-sm{font-family:Playfair Display}.font-label-lg,.font-label-md,.font-label-sm{font-family:Plus Jakarta Sans}.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}.font-sans{font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[12px\]{font-size:12px}.text-\[14px\]{font-size:14px}.text-\[15px\]{font-size:15px}.text-\[16px\]{font-size:16px}.text-\[17px\]{font-size:17px}.text-\[18px\]{font-size:18px}.text-\[20px\]{font-size:20px}.text-\[22px\]{font-size:22px}.text-\[24px\]{font-size:24px}.text-\[28px\]{font-size:28px}.text-\[30px\]{font-size:30px}.text-body-md{font-size:15px;line-height:24px;font-weight:400}.text-body-sm{font-size:13px;line-height:20px;font-weight:400}.text-headline-lg-mobile{font-size:28px;line-height:36px;font-weight:500}.text-headline-sm{font-size:22px;line-height:30px;font-weight:600}.text-label-lg{font-size:14px;line-height:20px;letter-spacing:.02em;font-weight:600}.text-label-md{font-size:12px;line-height:16px;letter-spacing:.03em;font-weight:600}.text-label-sm{font-size:11px;line-height:14px;letter-spacing:.04em;font-weight:500}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-.025em}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.text-emerald-600{--tw-text-opacity:1;color:rgb(5 150 105/var(--tw-text-opacity,1))}.text-emerald-700{--tw-text-opacity:1;color:rgb(4 120 87/var(--tw-text-opacity,1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175/var(--tw-text-opacity,1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128/var(--tw-text-opacity,1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55/var(--tw-text-opacity,1))}.text-on-primary{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-on-primary-fixed{--tw-text-opacity:1;color:rgb(0 33 13/var(--tw-text-opacity,1))}.text-on-secondary{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-on-secondary-fixed{--tw-text-opacity:1;color:rgb(59 7 17/var(--tw-text-opacity,1))}.text-on-surface{--tw-text-opacity:1;color:rgb(27 28 26/var(--tw-text-opacity,1))}.text-on-surface-variant{--tw-text-opacity:1;color:rgb(66 72 66/var(--tw-text-opacity,1))}.text-on-tertiary-fixed{--tw-text-opacity:1;color:rgb(34 20 57/var(--tw-text-opacity,1))}.text-primary{--tw-text-opacity:1;color:rgb(54 90 63/var(--tw-text-opacity,1))}.text-primary-container{--tw-text-opacity:1;color:rgb(78 115 86/var(--tw-text-opacity,1))}.text-primary-fixed{--tw-text-opacity:1;color:rgb(195 237 201/var(--tw-text-opacity,1))}.text-secondary{--tw-text-opacity:1;color:rgb(144 73 81/var(--tw-text-opacity,1))}.text-tertiary{--tw-text-opacity:1;color:rgb(90 75 115/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.underline{text-decoration-line:underline}.decoration-secondary-container{text-decoration-color:#ffa6ae}.decoration-wavy{text-decoration-style:wavy}.decoration-2{text-decoration-thickness:2px}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.shadow-\[0_4px_20px_rgba\(78\2c 115\2c 86\2c 0\.06\)\]{--tw-shadow:0 4px 20px rgba(78,115,86,.06);--tw-shadow-colored:0 4px 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-\[0_8px_20px_-4px_rgba\(54\2c 90\2c 63\2c 0\.35\)\]{--tw-shadow:0 8px 20px -4px rgba(54,90,63,.35);--tw-shadow-colored:0 8px 20px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-\[0_8px_20px_-4px_rgba\(78\2c 115\2c 86\2c 0\.25\)\]{--tw-shadow:0 8px 20px -4px rgba(78,115,86,.25);--tw-shadow-colored:0 8px 20px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-\[0_8px_24px_rgba\(54\2c 90\2c 63\2c 0\.3\)\]{--tw-shadow:0 8px 24px rgba(54,90,63,.3);--tw-shadow-colored:0 8px 24px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-\[0_8px_24px_rgba\(54\2c 90\2c 63\2c 0\.4\)\]{--tw-shadow:0 8px 24px rgba(54,90,63,.4);--tw-shadow-colored:0 8px 24px var(--tw-shadow-color)}.shadow-\[0_8px_24px_rgba\(54\2c 90\2c 63\2c 0\.4\)\],.shadow-inner{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgba(0,0,0,.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color)}.shadow-lg,.shadow-md{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color),0 2px 4px -2px var(--tw-shadow-color)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgba(0,0,0,.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color)}.shadow-sm,.shadow-xl{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color),0 8px 10px -6px var(--tw-shadow-color)}.outline{outline-style:solid}.blur-3xl{--tw-blur:blur(64px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-\[0\.5px\]{--tw-backdrop-blur:blur(0.5px)}.backdrop-blur-\[0\.5px\],.backdrop-blur-md{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px)}.backdrop-blur-sm,.backdrop-blur-xl{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-xl{--tw-backdrop-blur:blur(24px)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-shadow{transition-property:box-shadow;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.duration-300{transition-duration:.3s}.duration-500{transition-duration:.5s}.duration-700{transition-duration:.7s}.ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.selection\:bg-secondary-fixed ::-moz-selection{--tw-bg-opacity:1;background-color:rgb(255 218 219/var(--tw-bg-opacity,1))}.selection\:bg-secondary-fixed ::selection{--tw-bg-opacity:1;background-color:rgb(255 218 219/var(--tw-bg-opacity,1))}.selection\:text-on-secondary-fixed ::-moz-selection{--tw-text-opacity:1;color:rgb(59 7 17/var(--tw-text-opacity,1))}.selection\:text-on-secondary-fixed ::selection{--tw-text-opacity:1;color:rgb(59 7 17/var(--tw-text-opacity,1))}.selection\:bg-secondary-fixed::-moz-selection{--tw-bg-opacity:1;background-color:rgb(255 218 219/var(--tw-bg-opacity,1))}.selection\:bg-secondary-fixed::selection{--tw-bg-opacity:1;background-color:rgb(255 218 219/var(--tw-bg-opacity,1))}.selection\:text-on-secondary-fixed::-moz-selection{--tw-text-opacity:1;color:rgb(59 7 17/var(--tw-text-opacity,1))}.selection\:text-on-secondary-fixed::selection{--tw-text-opacity:1;color:rgb(59 7 17/var(--tw-text-opacity,1))}.placeholder\:text-on-surface-variant\/50::-moz-placeholder{color:rgba(66,72,66,.5)}.placeholder\:text-on-surface-variant\/50::placeholder{color:rgba(66,72,66,.5)}@media (hover:hover) and (pointer:fine){.hover\:-translate-y-0\.5:hover{--tw-translate-y:-0.125rem}.hover\:-translate-y-0\.5:hover,.hover\:-translate-y-1:hover{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:-translate-y-1:hover{--tw-translate-y:-0.25rem}.hover\:scale-110:hover{--tw-scale-x:1.1;--tw-scale-y:1.1}.hover\:scale-110:hover,.hover\:scale-\[1\.01\]:hover{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-\[1\.01\]:hover{--tw-scale-x:1.01;--tw-scale-y:1.01}.hover\:bg-primary:hover{--tw-bg-opacity:1;background-color:rgb(54 90 63/var(--tw-bg-opacity,1))}.hover\:bg-primary-container:hover{--tw-bg-opacity:1;background-color:rgb(78 115 86/var(--tw-bg-opacity,1))}.hover\:bg-secondary-container:hover{--tw-bg-opacity:1;background-color:rgb(255 166 174/var(--tw-bg-opacity,1))}.hover\:bg-surface-container:hover{--tw-bg-opacity:1;background-color:rgb(240 237 234/var(--tw-bg-opacity,1))}.hover\:bg-surface-container-high:hover{--tw-bg-opacity:1;background-color:rgb(234 232 229/var(--tw-bg-opacity,1))}.hover\:bg-surface-container-highest:hover{--tw-bg-opacity:1;background-color:rgb(229 226 223/var(--tw-bg-opacity,1))}.hover\:text-on-surface:hover{--tw-text-opacity:1;color:rgb(27 28 26/var(--tw-text-opacity,1))}.hover\:text-primary:hover{--tw-text-opacity:1;color:rgb(54 90 63/var(--tw-text-opacity,1))}.hover\:text-primary-container:hover{--tw-text-opacity:1;color:rgb(78 115 86/var(--tw-text-opacity,1))}.hover\:underline:hover{text-decoration-line:underline}.hover\:shadow-lg:hover{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}}.focus\:not-sr-only:focus{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;clip:auto;white-space:normal}.focus\:fixed:focus{position:fixed}.focus\:left-3:focus{left:.75rem}.focus\:top-3:focus{top:.75rem}.focus\:z-\[60\]:focus{z-index:60}.focus\:rounded-full:focus{border-radius:9999px}.focus\:bg-primary:focus{--tw-bg-opacity:1;background-color:rgb(54 90 63/var(--tw-bg-opacity,1))}.focus\:px-4:focus{padding-left:1rem;padding-right:1rem}.focus\:py-2:focus{padding-top:.5rem;padding-bottom:.5rem}.focus\:text-on-primary:focus{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.focus\:ring-2:focus{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.focus\:ring-primary:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(54 90 63/var(--tw-ring-opacity,1))}.active\:translate-y-0:active{--tw-translate-y:0px}.active\:scale-95:active,.active\:translate-y-0:active{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95}@media (hover:hover) and (pointer:fine){.group:hover .group-hover\:scale-105{--tw-scale-x:1.05;--tw-scale-y:1.05}.group:hover .group-hover\:scale-105,.group:hover .group-hover\:scale-110{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1}.group:hover .group-hover\:text-primary{--tw-text-opacity:1;color:rgb(54 90 63/var(--tw-text-opacity,1))}}@media (prefers-reduced-motion:reduce){.motion-reduce\:hidden{display:none}}@media (min-width:640px){.sm\:bottom-\[calc\(1\.5rem\+env\(safe-area-inset-bottom\)\)\]{bottom:calc(1.5rem + env(safe-area-inset-bottom))}.sm\:left-3{left:.75rem}.sm\:right-6{right:1.5rem}.sm\:top-20{top:5rem}.sm\:top-3{top:.75rem}.sm\:col-span-5{grid-column:span 5/span 5}.sm\:col-span-7{grid-column:span 7/span 7}.sm\:line-clamp-none{overflow:visible;display:block;-webkit-box-orient:horizontal;-webkit-line-clamp:none}.sm\:block{display:block}.sm\:inline{display:inline}.sm\:flex{display:flex}.sm\:inline-flex{display:inline-flex}.sm\:h-20{height:5rem}.sm\:h-32{height:8rem}.sm\:h-64{height:16rem}.sm\:h-80{height:20rem}.sm\:h-auto{height:auto}.sm\:w-auto{width:auto}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.sm\:flex-row{flex-direction:row}.sm\:flex-col{flex-direction:column}.sm\:gap-2{gap:.5rem}.sm\:gap-6{gap:1.5rem}.sm\:rounded-full{border-radius:9999px}.sm\:p-5{padding:1.25rem}.sm\:p-6{padding:1.5rem}.sm\:p-8{padding:2rem}.sm\:px-3{padding-left:.75rem;padding-right:.75rem}.sm\:px-4{padding-left:1rem;padding-right:1rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:py-2\.5{padding-top:.625rem;padding-bottom:.625rem}.sm\:pt-20{padding-top:5rem}.sm\:text-right{text-align:right}.sm\:text-headline-sm{font-size:22px;line-height:30px;font-weight:600}.sm\:text-sm{font-size:.875rem;line-height:1.25rem}}@media (min-width:768px){.md\:flex{display:flex}.md\:h-96{height:24rem}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:flex-row{flex-direction:row}.md\:items-end{align-items:flex-end}.md\:p-8{padding:2rem}.md\:px-margin{padding-left:2.5rem;padding-right:2.5rem}.md\:py-space-2xl{padding-top:4rem;padding-bottom:4rem}.md\:text-body-lg{font-size:18px;line-height:28px;font-weight:400}.md\:text-headline-lg{font-size:40px;line-height:48px;font-weight:500}}@media (min-width:1024px){.lg\:sticky{position:sticky}.lg\:top-24{top:6rem}.lg\:col-span-5{grid-column:span 5/span 5}.lg\:col-span-7{grid-column:span 7/span 7}.lg\:flex{display:flex}.lg\:hidden{display:none}.lg\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}.lg\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.lg\:text-display-lg{font-size:56px;line-height:64px;font-weight:600}}@media (min-width:1280px){.xl\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}</style><!-- DATA TERSTRUKTUR: ganti semua nilai "contoh" dengan data asli klien -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Florist",
+      "@id": "https://contoh-domain.id/#florist",
+      "name": "Denpasar Bloom Atelier",
+      "description": "Florist di Denpasar, Bali: hand bouquet, bunga papan, standing flower, dan bunga meja. Pesan lewat WhatsApp, antar ke Denpasar, Sanur, Renon, Kuta, Seminyak, dan Canggu, atau ambil di studio.",
+      "url": "https://contoh-domain.id/",
+      "telephone": "+6281234567890",
+      "image": "https://contoh-domain.id/foto-utama.jpg",
+      "priceRange": "Rp145.000 - Rp500.000",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Jl. Contoh No. 00, Renon",
+        "addressLocality": "Denpasar",
+        "addressRegion": "Bali",
+        "postalCode": "80226",
+        "addressCountry": "ID"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "07:00",
+          "closes": "22:00"
+        }
+      ],
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Denpasar"
+        },
+        {
+          "@type": "City",
+          "name": "Sanur"
+        },
+        {
+          "@type": "City",
+          "name": "Renon"
+        },
+        {
+          "@type": "City",
+          "name": "Kuta"
+        },
+        {
+          "@type": "City",
+          "name": "Legian"
+        },
+        {
+          "@type": "City",
+          "name": "Seminyak"
+        },
+        {
+          "@type": "City",
+          "name": "Kerobokan"
+        },
+        {
+          "@type": "City",
+          "name": "Canggu"
+        },
+        {
+          "@type": "City",
+          "name": "Jimbaran"
+        },
+        {
+          "@type": "City",
+          "name": "Nusa Dua"
+        }
+      ],
+      "sameAs": [],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Katalog bunga",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "priceCurrency": "IDR",
+            "price": "185000",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Buket Mawar Soft Peach",
+              "description": "Graduation, Anniversary & Kado Ultah manis penuh kehangatan."
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "IDR",
+            "price": "165000",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Buket Bunga Matahari Semangat",
+              "description": "Simbol keceriaan, wisuda universitas di Bali, dan get well soon."
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "IDR",
+            "price": "145000",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Baby's Breath Rainbow",
+              "description": "Awan bunga abadi warna pastel manis tahan berbulan-bulan."
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "IDR",
+            "price": "450000",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Bunga Papan Wedding Estetik",
+              "description": "Desain kontemporer minimalis elegan untuk resepsi hotel & villa."
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "IDR",
+            "price": "400000",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Bunga Papan Duka Cita Elegan",
+              "description": "Ungkapan belasungkawa terhormat dengan bunga segar putih & hijau."
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "IDR",
+            "price": "500000",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Papan Ucapan Sukses Usaha",
+              "description": "Sempurna untuk peresmian kafe, restoran, butik & kantor baru di Bali."
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "IDR",
+            "price": "380000",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Standing Akrilik Balon & Roses",
+              "description": "Desain eye-catching kekinian untuk pameran, birthday party & wisuda."
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "IDR",
+            "price": "275000",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Bunga Keranjang Meja Rustic",
+              "description": "Keranjang rotan khas Bali dengan oasis basah tahan segar 5-7 hari."
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "IDR",
+            "price": "320000",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Buket Tulip Holland Import",
+              "description": "Keanggunan tulip Belanda untuk kejutan romantis."
+            }
+          },
+          {
+            "@type": "Offer",
+            "priceCurrency": "IDR",
+            "price": "290000",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "Bloom Box Eksklusif & Cokelat",
+              "description": "Kotak beludru elegan berisi bunga segar rapat & cokelat manis premium."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Bisa order mendadak / butuh dikirim dalam 2-3 jam?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bisa diusahakan. Pesanan mendadak bisa kami usahakan, tergantung stok bunga, jenis rangkaian, dan jarak pengiriman. Pilih slot \"Same-Day Urgent\" di planner atau chat WhatsApp langsung agar kami cek ketersediaannya lebih dulu."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Area pengiriman mana saja yang dicakup?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kami melayani pengiriman ke seluruh wilayah Kota Denpasar (Renon, Sanur, Panjer, Teuku Umar, Gatot Subroto, Sesetan, Kesiman, Ubung, Pemogan) serta kawasan sekitar seperti Badung (Kuta, Legian, Seminyak, Kerobokan, Canggu, Jimbaran, Nusa Dua, dan Ubud Selatan)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jam operasional toko dan jadwal kurir pengiriman?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Atelier kami buka setiap hari (Senin - Minggu) pukul 07.00 - 22.00 WITA. Jadwal kloter pengiriman kurir bunga dimulai sejak pukul 08.00 pagi sampai pukul 20.00 malam. Khusus pesanan surprise subuh atau tengah malam bisa diatur H-1."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Apakah kartu ucapan dan foto hasil sebelum kirim sudah termasuk?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kartu ucapan gratis. Setiap buket, bloom box, dan bunga papan sudah termasuk kartu ucapan. Kami juga mengirim foto hasil rangkaian ke WhatsApp Anda untuk konfirmasi sebelum kurir berangkat."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed"><a class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:px-4 focus:py-2 focus:rounded-full focus:bg-primary focus:text-on-primary" href="#main">Lewati ke konten utama</a>
+<header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_4px_20px_rgba(78,115,86,0.06)] transition-shadow duration-300" id="siteHeader">
+<div class="h-16 sm:h-20 max-w-7xl mx-auto px-margin-mobile md:px-margin flex items-center justify-between gap-2">
+<a aria-label="Denpasar Bloom Atelier, ke beranda" class="flex items-center gap-2.5 min-w-0" href="#beranda">
+<img alt="Logo Denpasar Bloom Atelier" class="hidden sm:block h-8 w-auto object-contain" height="32" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkkU5J5eZNvLfeCClhllctnRgEMQWpbxECjoIx2s6d1yu4p4vEvWBCR2uXwK2XSveWDKTDlwGXp9YNBizC8hcosIwQjwQR-xOo4TBi1_l1Agn7tR6hjrt860lGOLo0r8hf8JaIKtSazEdT8EzVxM7D0WwlcgDdw5PQGxam5diBNYeerjbusXqGe_bsV3mZ_bXOuy-2b9BWYtLsw0v_vRkKZrrvtLaZJN-1U5_loJf1AAhtfpOvpR9W" width="32">
+<span class="font-headline-sm text-[17px] sm:text-headline-sm text-primary tracking-tight leading-tight hover:text-primary-container transition-colors">Denpasar Bloom Atelier</span>
+</a>
+<nav aria-label="Navigasi utama" class="hidden lg:flex items-center gap-1 bg-surface-container-low px-2 py-1.5 rounded-full shadow-inner">
+<a class="nav-link px-3.5 py-1.5 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-nav="beranda" href="#beranda">Beranda</a>
+<a class="nav-link px-3.5 py-1.5 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-nav="planner-section" href="#planner-section">Pesan</a>
+<a class="nav-link px-3.5 py-1.5 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-nav="katalog-section" href="#katalog-section">Katalog</a>
+<a class="nav-link px-3.5 py-1.5 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-nav="faq-section" href="#faq-section">FAQ</a>
+<a class="nav-link px-3.5 py-1.5 rounded-full font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" data-nav="lokasi-section" href="#lokasi-section">Lokasi</a>
+</nav>
+<div class="flex items-center gap-2 shrink-0">
+<a aria-label="Order via WhatsApp" class="inline-flex items-center justify-center gap-2 w-11 h-11 sm:w-auto sm:h-auto sm:px-4 sm:py-2.5 rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg shadow-[0_8px_20px_-4px_rgba(78,115,86,0.25)] transition-all transform hover:-translate-y-0.5 active:translate-y-0" href="https://wa.me/6281234567890" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span class="hidden sm:inline">Order via WhatsApp</span>
+</a>
+<button aria-controls="mobileMenu" aria-expanded="false" aria-label="Buka menu" class="lg:hidden w-11 h-11 rounded-full bg-surface-container-low hover:bg-surface-container-high text-primary flex items-center justify-center transition-colors" id="menuToggle" type="button">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+</div>
+</header>
+<div aria-hidden="true" class="menu-scrim lg:hidden fixed inset-0 z-30 bg-on-background/25" id="menuScrim"></div>
+<nav aria-label="Menu mobile" class="mobile-menu lg:hidden fixed left-0 right-0 top-16 sm:top-20 z-40 px-margin-mobile pt-2 pb-5 bg-surface/95 backdrop-blur-xl shadow-lg rounded-b-3xl" id="mobileMenu">
+<ul class="flex flex-col gap-1">
+<li><a class="m-link flex items-center gap-3 min-h-[48px] px-4 rounded-2xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container-high transition-colors" data-nav="beranda" href="#beranda"><span class="material-symbols-outlined text-[20px] text-primary">home</span>Beranda</a></li>
+<li><a class="m-link flex items-center gap-3 min-h-[48px] px-4 rounded-2xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container-high transition-colors" data-nav="planner-section" href="#planner-section"><span class="material-symbols-outlined text-[20px] text-primary">edit_note</span>Pesan Cepat</a></li>
+<li><a class="m-link flex items-center gap-3 min-h-[48px] px-4 rounded-2xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container-high transition-colors" data-nav="katalog-section" href="#katalog-section"><span class="material-symbols-outlined text-[20px] text-primary">local_florist</span>Katalog</a></li>
+<li><a class="m-link flex items-center gap-3 min-h-[48px] px-4 rounded-2xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container-high transition-colors" data-nav="faq-section" href="#faq-section"><span class="material-symbols-outlined text-[20px] text-primary">help</span>Tanya Jawab</a></li>
+<li><a class="m-link flex items-center gap-3 min-h-[48px] px-4 rounded-2xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container-high transition-colors" data-nav="lokasi-section" href="#lokasi-section"><span class="material-symbols-outlined text-[20px] text-primary">location_on</span>Lokasi &amp; Kontak</a></li>
+</ul>
+<a class="mt-3 flex items-center justify-center gap-2 min-h-[48px] rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-[0_8px_20px_-4px_rgba(54,90,63,0.35)]" href="https://wa.me/6281234567890" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[20px]">chat</span>Chat WhatsApp</a>
+</nav>
+<main class="w-full pt-16 sm:pt-20 bg-surface" id="main"><div class="flex flex-col w-full">
+<!-- HERO SECTION -->
+<section class="relative w-full overflow-hidden bg-gradient-to-b from-surface via-surface-container-low to-surface py-10 md:py-space-2xl px-margin-mobile md:px-margin" id="beranda">
+<!-- Ambient organic blobs -->
+<div aria-hidden="true" class="blob-drift absolute -top-24 -left-20 w-96 h-96 rounded-full bg-secondary-fixed/40 blur-3xl pointer-events-none"></div>
+<div aria-hidden="true" class="blob-drift absolute top-1/3 -right-24 w-80 h-80 rounded-full bg-primary-fixed/40 blur-3xl pointer-events-none" style="animation-delay:-6s"></div>
+<div aria-hidden="true" class="absolute inset-0 overflow-hidden pointer-events-none"><span class="petal" style="left:6%;animation-duration:15s;animation-delay:-1s;font-size:22px">🌸</span><span class="petal hidden sm:block" style="left:24%;animation-duration:19s;animation-delay:-7s;font-size:18px">🌼</span><span class="petal" style="left:43%;animation-duration:16s;animation-delay:-4s;font-size:24px">🌷</span><span class="petal hidden sm:block" style="left:62%;animation-duration:21s;animation-delay:-10s;font-size:18px">🌸</span><span class="petal" style="left:80%;animation-duration:17s;animation-delay:-2s;font-size:22px">🌼</span><span class="petal hidden sm:block" style="left:92%;animation-duration:20s;animation-delay:-12s;font-size:20px">🌸</span></div>
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center relative z-10">
+<!-- Left Column: Copy & Value Props -->
+<div class="lg:col-span-7 space-y-space-md" data-stagger data-delay="80">
+<!-- Cute Tagline Badge -->
+<!-- Big Display Headline -->
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg lg:text-display-lg text-primary tracking-tight leading-tight">
+          Buket Cantik &amp; Bunga Papan Estetik Siap Kirim Hari Ini ke <span class="italic text-secondary underline decoration-secondary-container decoration-wavy decoration-2">Seluruh Denpasar</span>
+</h1>
+<!-- Subtext -->
+<p class="font-body-lg text-body-md md:text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+          Melayani hand bouquet wisuda, kado ulang tahun romantis, bunga meja kantor, hingga bunga papan modern ucapan selamat &amp; duka cita. Pengiriman kilat <span class="font-semibold text-primary">Same-Day Delivery</span> ke Denpasar, Sanur, Renon, Canggu, hingga Kuta.
+        </p>
+<!-- CTAs -->
+<div class="flex flex-wrap items-center gap-space-sm pt-2">
+<a class="inline-flex w-full sm:w-auto justify-center items-center gap-2.5 px-6 py-3.5 rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-[0_8px_20px_-4px_rgba(54,90,63,0.35)] hover:bg-primary-container transform hover:-translate-y-0.5 transition-all" href="https://wa.me/6281234567890?text=Halo%20Admin%20Denpasar%20Bloom%20Atelier!%20Saya%20ingin%20tanya%20rangkaian%20bunga%20segar%20hari%20ini%20🌸" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+<span class="">Chat WhatsApp Sekarang</span>
+</a>
+<a class="inline-flex w-full sm:w-auto justify-center items-center gap-2 px-6 py-3.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-lg text-label-lg shadow-sm hover:bg-secondary-container transform hover:-translate-y-0.5 transition-all" href="#planner-section">
+<span class="">Rancang Pesanan Cepat 💐</span>
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</a>
+</div>
+<!-- Mini Value Badges (3 items) -->
+<div class="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="flex items-center gap-2.5 p-3 rounded-xl bg-surface-container-lowest/80 backdrop-blur-sm shadow-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">card_giftcard</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Free Kartu Ucapan</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Desain floral estetik</p>
+</div>
+</div>
+<div class="flex items-center gap-2.5 p-3 rounded-xl bg-surface-container-lowest/80 backdrop-blur-sm shadow-sm">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">local_florist</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Bunga Segar</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Dirangkai per pesanan</p>
+</div>
+</div>
+<div class="flex items-center gap-2.5 p-3 rounded-xl bg-surface-container-lowest/80 backdrop-blur-sm shadow-sm">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]">electric_moped</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Jadwal Kirim Jelas</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Diantar kurir kami</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Visual Bento Layout inspired by Image references -->
+<div class="lg:col-span-5 relative" data-reveal="zoom" data-delay="350">
+<div class="relative grid grid-cols-12 gap-3 p-3 rounded-3xl bg-surface-container/60 backdrop-blur-sm shadow-xl">
+<!-- Tall Arched Showcase Card -->
+<div class="col-span-12 sm:col-span-7 relative rounded-2xl overflow-hidden shadow-md group">
+<img alt="Hand bouquet pastel Peach Romance dari florist Denpasar: mawar peach, peony pink muda, baby's breath, dan eukaliptus" class="w-full h-64 sm:h-80 object-cover group-hover:scale-105 transition-transform duration-700" fetchpriority="high" width="640" height="640" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwAg1bnWPTF_OzcL-mk_J02ZRwfJkGFea6Hkm3ucoFsnYGx2PmY8j_W_5SiO1Qlp6XZB77wUl4e8f4BcqtNtk2Vik-qxVeIGK5sw2sL6In1mlUx6-PDMthyZr8BR9UKhe7dPsY7MU_Kmw-tnobERnE4l7yQG0JTOg8hVWvHkHZmIr-yidrCFrYKOxDZlfMxl7tjFlT_IhsQ2rYU5WyJwXU9HHql4BROgMGFEmPmIzTnsvcrSMWS3-Y">
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/70 via-transparent to-transparent"></div>
+<!-- Sticker Badges -->
+<div class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-md text-primary font-label-sm text-label-sm font-bold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+<span class="">Cocok untuk Wisuda 🎓</span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 text-on-primary">
+<p class="font-headline-sm text-headline-sm leading-tight text-white">Peach Romance</p>
+<p class="font-label-sm text-label-sm text-primary-fixed">Pesan lewat WhatsApp</p>
+</div>
+</div>
+<!-- Stack of 2 Right Cards -->
+<div class="col-span-12 sm:col-span-5 grid grid-cols-2 sm:flex sm:flex-col gap-3">
+<!-- Mini Card 1: Modern Table arrangement -->
+<div class="anim-float rounded-2xl bg-secondary-fixed/50 p-2.5 flex flex-col gap-2 shadow-sm relative overflow-hidden group">
+<div class="w-full h-24 sm:h-32 rounded-xl overflow-hidden">
+<img alt="Sunny Bloom Vase, rangkaian bunga meja bunga matahari dan mawar kuning untuk kafe dan kantor di Denpasar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width="320" height="256" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsvYmNsEspRXnZ4IenPe4fTZ7ZHfRl6cilodBEUywFpYOujTkMOCGesC080LJeKYIXNGo4JWJWndk_DNUiYMg5O5ZqyQ1U8P34uX7WsaC4FnEVkes1FAvnOj0RkpdWeXKj23EgKIy3NdIVMxYZiv8H84R-IjS-LX7Kw0JAywfW4YDo8y6RdL5kD7ICVHZEhnsUlegYV1o0_jgEAnuPd40yZDiQz6WFvBSTB3okF4i2UoZHvKZsHH9s">
+</div>
+<div class="px-1">
+<span class="inline-block px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-[10px] uppercase font-bold tracking-wider">Untuk Meja Kafe</span>
+<p class="font-label-md text-label-md font-bold text-on-surface mt-1 truncate">Sunny Bloom Vase</p>
+<p class="font-label-sm text-label-sm text-secondary font-semibold">Mulai Rp165.000</p>
+</div>
+</div>
+<!-- Mini Card 2: Aesthetic Board Preview -->
+<div class="anim-float-2 rounded-2xl bg-primary-fixed/40 p-2.5 flex flex-col gap-1.5 shadow-sm">
+<div class="flex items-center gap-1.5 text-primary">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-sm text-label-sm font-bold">Papan Rustic Bali</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-tight">Foam board premium dengan sentuhan bunga segar tropis.</p>
+<div class="mt-1 flex flex-wrap items-center justify-between gap-x-2 text-primary font-label-sm text-label-sm">
+<span class="">Sanur • Renon</span>
+<span class="font-bold">Mulai 400rb</span>
+</div>
+</div>
+</div>
+<!-- Floating badge sticker -->
+</div>
+</div>
+</div>
+</section>
+<!-- INTERACTIVE PLANNER PESANAN (Auto-WhatsApp Generator) -->
+<section class="w-full py-12 md:py-space-2xl px-margin-mobile md:px-margin bg-surface-container-low relative" id="planner-section">
+<div class="max-w-7xl mx-auto space-y-space-lg">
+<!-- Section Header -->
+<div class="text-center max-w-2xl mx-auto space-y-2" data-stagger>
+<div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px]">magic_button</span>
+<span class="">Pesan Lebih Cepat</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
+          Planner Pesanan Cepat <span class="block italic text-secondary">(Auto-WhatsApp)</span></h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Pilih preferensi rangkaian bungamu, tulis kartu ucapan, dan sistem kami langsung membuat draf chat rapi untuk dikirim ke WhatsApp florist kami dalam 1 klik!
+        </p>
+</div>
+<!-- Main Form & Live Preview Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Left: Interactive Configuration Form -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-5 sm:p-6 md:p-8 rounded-3xl shadow-sm space-y-6" data-reveal="left">
+<!-- Step 0: Fulfillment Method Toggle (Delivery vs Self Pick Up) -->
+<div class="space-y-2.5">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+<span class="">Metode Penerimaan Bunga 🌸</span>
+<span class="text-secondary font-label-sm text-label-sm">*Pilih Salah Satu</span>
+</label>
+<div class="grid grid-cols-2 gap-3 p-1.5 bg-surface-container rounded-2xl shadow-inner" id="fulfillmentToggle">
+<button class="fulfillment-btn active-fulfillment py-3 px-2 sm:px-4 min-h-[56px] rounded-xl font-label-lg text-label-lg font-semibold flex flex-col sm:flex-row text-center leading-tight items-center justify-center gap-1 sm:gap-2 transition-all bg-primary text-on-primary shadow-sm" data-method="delivery" type="button">
+<span class="material-symbols-outlined text-[20px]">moped</span>
+<span class="">Delivery (Diantar Kurir)</span>
+</button>
+<button class="fulfillment-btn py-3 px-2 sm:px-4 min-h-[56px] rounded-xl font-label-lg text-label-lg font-semibold flex flex-col sm:flex-row text-center leading-tight items-center justify-center gap-1 sm:gap-2 transition-all hover:bg-surface-container-high text-on-surface" data-method="pickup" type="button">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+<span class="">Self Pick Up (Ambil di Studio)</span>
+</button>
+</div>
+</div>
+<!-- Step 1: Pilihan Jenis Bunga -->
+<div class="space-y-3">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+<span class="">1. Pilih Kategori Rangkaian Bunga 💐</span>
+<span class="text-secondary font-label-sm text-label-sm">*Wajib</span>
+</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="categorySelector">
+<button class="planner-cat-btn active-cat p-3 rounded-2xl text-left transition-all flex flex-col justify-between h-24 bg-primary text-on-primary shadow-sm" data-val="Hand Bouquet Pastel" type="button">
+<span class="material-symbols-outlined text-[24px] text-on-primary">local_florist</span>
+<span class="font-label-md text-label-md font-semibold leading-tight">Hand Bouquet Pastel</span>
+</button>
+<button class="planner-cat-btn p-3 rounded-2xl hover:bg-surface-container-high text-left transition-all flex flex-col justify-between h-24 bg-surface-container text-on-surface" data-val="Bunga Papan Rustic / Elegan" type="button">
+<span class="material-symbols-outlined text-[24px] text-primary">filter_frames</span>
+<span class="font-label-md text-label-md font-semibold leading-tight">Bunga Papan Rustic</span>
+</button>
+<button class="planner-cat-btn p-3 rounded-2xl hover:bg-surface-container-high text-left transition-all flex flex-col justify-between h-24 bg-surface-container text-on-surface" data-val="Standing Flower Mewah" type="button">
+<span class="material-symbols-outlined text-[24px] text-primary">emoji_events</span>
+<span class="font-label-md text-label-md font-semibold leading-tight">Standing Flower</span>
+</button>
+<button class="planner-cat-btn p-3 rounded-2xl bg-surface-container hover:bg-surface-container-high text-on-surface text-left transition-all flex flex-col justify-between h-24" data-val="Bunga Meja Keranjang" type="button">
+<span class="material-symbols-outlined text-[24px] text-primary">shopping_basket</span>
+<span class="font-label-md text-label-md font-semibold leading-tight">Bunga Meja Keranjang</span>
+</button>
+</div>
+</div>
+<!-- Dynamic Container: DELIVERY AREA SELECTION -->
+<div class="space-y-3" id="deliveryAreaSection">
+<label class="font-label-lg text-label-lg text-on-surface font-semibold flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+<span class="">2. Area Pengiriman di Denpasar / Sekitarnya 🛵</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Pilih area terdekat</span>
+</label>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2" id="areaSelector">
+<button class="planner-area-btn active-area px-3 py-2.5 min-h-[44px] flex items-center justify-center rounded-full bg-secondary text-on-secondary text-xs font-semibold text-center transition-all" data-area="Denpasar Selatan (Sanur, Renon, Sidakarya)" type="button">
+                Denpasar Selatan (Sanur/Renon)
+              </button>
+<button class="planner-area-btn px-3 py-2.5 min-h-[44px] flex items-center justify-center rounded-full bg-surface-container text-on-surface text-xs font-semibold text-center hover:bg-surface-container-high transition-all" data-area="Denpasar Barat (Teuku Umar, Marlboro)" type="button">
+                Denpasar Barat (Teuku Umar)
+              </button>
+<button class="planner-area-btn px-3 py-2.5 min-h-[44px] flex items-center justify-center rounded-full bg-surface-container text-on-surface text-xs font-semibold text-center hover:bg-surface-container-high transition-all" data-area="Denpasar Timur (Tohpati, Kesiman)" type="button">
+                Denpasar Timur (Kesiman)
+              </button>
+<button class="planner-area-btn px-3 py-2.5 min-h-[44px] flex items-center justify-center rounded-full bg-surface-container text-on-surface text-xs font-semibold text-center hover:bg-surface-container-high transition-all" data-area="Denpasar Utara (Gatot Subroto, Ubung)" type="button">
+                Denpasar Utara (Gatsu/Ubung)
+              </button>
+<button class="planner-area-btn px-3 py-2.5 min-h-[44px] flex items-center justify-center rounded-full bg-surface-container text-on-surface text-xs font-semibold text-center hover:bg-surface-container-high transition-all" data-area="Kuta &amp; Seminyak" type="button">
+                Kuta &amp; Seminyak
+              </button>
+<button class="planner-area-btn px-3 py-2.5 min-h-[44px] flex items-center justify-center rounded-full bg-surface-container text-on-surface text-xs font-semibold text-center hover:bg-surface-container-high transition-all" data-area="Canggu &amp; Kerobokan" type="button">
+                Canggu &amp; Kerobokan
+              </button>
+</div>
+</div>
+<!-- Dynamic Container: PICKUP CALLOUT BOX (Hidden by default) -->
+<div class="p-4 rounded-2xl bg-secondary-fixed/40 border border-secondary-fixed space-y-2 hidden" id="pickupCalloutSection">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shrink-0 shadow-sm mt-0.5">
+<span class="material-symbols-outlined text-[20px]">storefront</span>
+</div>
+<div class="space-y-1">
+<h4 class="font-label-md text-label-md font-bold text-on-surface">Ambil langsung di studio Denpasar</h4>
+<p class="font-body-sm text-body-sm text-on-surface leading-snug">
+Jl. Contoh No. 00, Renon, Denpasar Selatan (Buka 07.00 - 22.00 WITA) - <span class="font-semibold text-secondary">Tanpa ongkir kirim</span>
+</p>
+<span class="inline-flex items-center gap-1 text-[11px] font-semibold text-primary">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Rangkaian dikemas cantik &amp; aman di mobil/motor
+</span>
+</div>
+</div>
+</div>
+<!-- Step 3: Waktu Kirim / Ambil & Tanggal -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface font-semibold" for="deliveryDate" id="dateLabel">3. Tanggal Pengiriman 📅</label>
+<input class="w-full px-4 py-3 rounded-2xl bg-surface-container text-on-surface font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-inner" id="deliveryDate" type="date">
+</div>
+<!-- Slot Waktu Delivery -->
+<div class="space-y-2" id="deliveryTimeSlotWrapper">
+<label class="block font-label-md text-label-md text-on-surface font-semibold" for="timeSlot">Slot Waktu Tiba ⏰</label>
+<select class="w-full px-4 py-3 rounded-2xl bg-surface-container text-on-surface font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-inner" id="timeSlot">
+<option value="Same-Day Urgent (2-3 Jam)">⚡ Same-Day Urgent (2-3 Jam)</option>
+<option selected="" value="Pagi (08.00 - 11.00 WITA)">Pagi (08.00 - 11.00 WITA)</option>
+<option value="Siang (11.00 - 15.00 WITA)">Siang (11.00 - 15.00 WITA)</option>
+<option value="Sore/Malam (15.00 - 20.00 WITA)">Sore/Malam (15.00 - 20.00 WITA)</option>
+</select>
+</div>
+<!-- Jam Pengambilan Pick Up (Hourly 08:00 to 21:00) -->
+<div class="space-y-2 hidden" id="pickupTimeSlotWrapper">
+<label class="block font-label-md text-label-md text-on-surface font-semibold" for="pickupTimeSlot">Pilih Jam Pengambilan ⏰</label>
+<select class="w-full px-4 py-3 rounded-2xl bg-surface-container text-on-surface font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-inner" id="pickupTimeSlot">
+<option value="08:00">08:00 WITA (Pagi)</option>
+<option value="09:00">09:00 WITA</option>
+<option selected="" value="10:00">10:00 WITA</option>
+<option value="11:00">11:00 WITA</option>
+<option value="12:00">12:00 WITA (Siang)</option>
+<option value="13:00">13:00 WITA</option>
+<option value="14:00">14:00 WITA</option>
+<option value="15:00">15:00 WITA (Sore)</option>
+<option value="16:00">16:00 WITA</option>
+<option value="17:00">17:00 WITA</option>
+<option value="18:00">18:00 WITA</option>
+<option value="19:00">19:00 WITA (Malam)</option>
+<option value="20:00">20:00 WITA</option>
+<option value="21:00">21:00 WITA</option>
+</select>
+</div>
+</div>
+<!-- Step 4: Kontak Pengirim & Penerima -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface font-semibold" for="senderName" id="senderLabel">Nama Anda (Pengirim)</label>
+<input class="w-full px-4 py-3 rounded-2xl bg-surface-container text-on-surface placeholder:text-on-surface-variant/50 font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-inner" id="senderName" placeholder="Contoh: Putu Arya / Sarah" type="text">
+</div>
+<div class="space-y-2">
+<label class="block font-label-md text-label-md text-on-surface font-semibold" for="recipientName" id="recipientLabel">Nama Penerima &amp; No. HP</label>
+<input class="w-full px-4 py-3 rounded-2xl bg-surface-container text-on-surface placeholder:text-on-surface-variant/50 font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-inner" id="recipientName" placeholder="Contoh: Kadek Dewi (0819...)" type="text">
+</div>
+</div>
+<!-- Step 5: Teks Kartu Ucapan -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="block font-label-md text-label-md text-on-surface font-semibold" for="cardMessage">Pesan Manis di Kartu Ucapan (Gratis) 💌</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="charCount">0 / 200</span>
+</div>
+<textarea class="w-full p-4 rounded-2xl bg-surface-container text-on-surface placeholder:text-on-surface-variant/50 font-body-sm focus:outline-none focus:ring-2 focus:ring-primary shadow-inner resize-none" id="cardMessage" maxlength="200" placeholder="Tuliskan ucapan tulus Anda... (Contoh: Selamat wisuda ya cintaku! Semoga langkah barumu selalu bermekaran indah! ✨)" rows="3"></textarea>
+</div>
+</div>
+<!-- Right: Live WhatsApp Format Preview & Action Button -->
+<div class="lg:col-span-5 space-y-4 lg:sticky lg:top-24" data-reveal="right" data-delay="150">
+<div class="bg-surface-container-lowest p-6 rounded-3xl shadow-md space-y-4 relative overflow-hidden">
+<div class="flex items-center justify-between border-b border-surface-container pb-3">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+<span class="font-label-md text-label-md font-bold text-on-surface">Live Preview Pesan WhatsApp</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-[11px] font-semibold">Siap Dikirim</span>
+</div>
+<!-- WhatsApp Message Bubble Look -->
+<div class="bg-[#dcf8c6] text-on-surface p-4 rounded-2xl shadow-sm text-sm space-y-2 leading-relaxed relative break-words">
+<div class="text-[12px] text-gray-500 flex items-center justify-between">
+<span class="">WhatsApp Template Florist</span>
+<span class="">Denpasar Bloom</span>
+</div>
+<pre class="whitespace-pre-wrap break-words font-sans text-xs sm:text-sm text-gray-800 rounded-lg" id="previewContent">Halo Admin Bloom Atelier! Saya mau pesan bunga:
+- Metode: Delivery (Diantar Kurir)
+- Kategori: Hand Bouquet Pastel
+- Area Kirim: Denpasar Selatan (Sanur, Renon, Sidakarya)
+- Tanggal Kirim: 2026-10-24
+- Slot Waktu: Pagi (08.00 - 11.00 WITA)
+- Nama Pengirim: Tamu
+- Nama &amp; Kontak Penerima: -
+- Kartu Ucapan: "(Belum diisi / pesan menyusul)"
+
+Bisa dibantu cek ketersediaan slotnya ya kak? Terima kasih! 💕</pre>
+<div class="text-right text-[11px] text-gray-400">10:42 ✓✓</div>
+</div>
+<!-- Notice note -->
+<div class="flex items-start gap-2 p-3 rounded-2xl bg-surface-container text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">info</span>
+<p class="">Setelah menekan tombol di bawah, aplikasi WhatsApp Anda akan otomatis terbuka dengan format pesan di atas tanpa perlu mengetik ulang!</p>
+</div>
+<!-- Big Submit CTA -->
+<button class="w-full py-4 px-6 rounded-full bg-primary text-on-primary font-label-lg text-label-lg shadow-[0_8px_24px_rgba(54,90,63,0.3)] hover:bg-primary-container transition-all flex items-center justify-center gap-2 transform hover:scale-[1.01] active:scale-95" id="sendWhatsAppBtn" type="button">
+<span class="material-symbols-outlined text-[22px]">send</span>
+<span class="font-bold">Kirim Pesanan ke WhatsApp Kami 🚀💬</span>
+</button>
+<!-- Quick reassurance badges -->
+<div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-center pt-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">chat</span> Konfirmasi via WhatsApp
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary">payments</span> Pembayaran QRIS / Transfer
+              </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- KATALOG PRODUK LENGKAP (10 Items with "Mulai Rp[harga]") -->
+<section class="w-full py-12 md:py-space-2xl px-margin-mobile md:px-margin bg-surface" id="katalog-section">
+<div class="max-w-7xl mx-auto space-y-space-xl">
+<!-- Catalog Header & Filter Pills -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md" data-stagger>
+<div class="space-y-2">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">
+<span class="">💐 Koleksi Segar Denpasar</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
+            Katalog Bunga Pilihan Atelier
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Setiap karya dirangkai teliti oleh florist profesional dengan bunga lokal dan impor pilihan.
+          </p>
+</div>
+<!-- Filter tabs for fun interactivity -->
+<div class="flex flex-wrap items-center gap-1.5 bg-surface-container-low p-1.5 rounded-3xl sm:rounded-full shadow-inner" role="group" aria-label="Filter katalog">
+<button class="catalog-filter active-filter px-4 py-2 min-h-[40px] rounded-full font-label-sm text-label-sm font-semibold transition-all bg-primary text-on-primary" data-filter="all">Semua (10)</button>
+<button class="catalog-filter px-4 py-2 min-h-[40px] rounded-full hover:bg-surface-container font-label-sm text-label-sm transition-all text-on-surface-variant" data-filter="bouquet">Buket</button>
+<button class="catalog-filter px-4 py-2 min-h-[40px] rounded-full hover:bg-surface-container font-label-sm text-label-sm transition-all text-on-surface-variant" data-filter="papan">Bunga Papan</button>
+<button class="catalog-filter px-4 py-2 min-h-[40px] rounded-full hover:bg-surface-container font-label-sm text-label-sm transition-all text-on-surface-variant" data-filter="table">Meja &amp; Standing</button>
+</div>
+</div>
+<!-- 10 Product Cards Grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6" data-stagger="grid" id="productGrid">
+<!-- Item 1 -->
+<div class="product-item rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group" data-category="bouquet">
+<div class="relative w-full h-40 sm:h-64 overflow-hidden bg-surface-container">
+<img alt="Buket Mawar Soft Peach, rangkaian bunga dari florist Denpasar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" decoding="async" height="512" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_p0O8_xziF_EBN_Ca4Qua2lCEUxTiHof1jxa9jHv2rtQYrFC3KGfv5O730qvofaCD18b5EGZiQtgloEHCEsX-4ONH1-SraxPLYfLlFxUB4nJaeWuCO5Bk1qfwjMG8Ga7mIds_oyd664YNWoVwnkVVQVtKlwShX-AC0X3hISaMAJFeHjHqbv2A90a1qLbNuv_O3lCQWePQ-bQaMiFOAohX-vaXjEDrUtU8FIBaB3F59l1xRJEnnKT8" width="512">
+<span class="absolute top-2 left-2 sm:top-3 sm:left-3 max-w-[calc(100%-1rem)] truncate px-2.5 sm:px-3 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold shadow-sm">Cocok untuk Kado ❤️</span>
+<span class="absolute top-3 right-3 hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[14px]">bolt</span>Sameday
+            </span>
+</div>
+<div class="p-3 sm:p-5 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface group-hover:text-primary transition-colors">Buket Mawar Soft Peach</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3 sm:line-clamp-none">Graduation, Anniversary &amp; Kado Ultah manis penuh kehangatan.</p>
+<p class="font-label-sm text-label-sm text-primary-container mt-2 hidden sm:flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Estimasi buat: 1-2 Jam
+              </p>
+</div>
+<div class="pt-3 border-t border-surface-container flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Harga</span>
+<span class="font-headline-sm text-[15px] sm:text-headline-sm text-secondary font-bold">Mulai Rp185.000</span>
+</div>
+<a aria-label="Pesan Buket Mawar Soft Peach via WhatsApp" class="w-11 h-11 shrink-0 justify-center rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin%20Denpasar%20Bloom!%20Saya%20tertarik%20pesan%20Buket%20Mawar%20Soft%20Peach%20(Mulai%20Rp185.000)" rel="noopener noreferrer" target="_blank">
+
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="product-item rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group" data-category="bouquet">
+<div class="relative w-full h-40 sm:h-64 overflow-hidden bg-surface-container">
+<img alt="Buket Bunga Matahari Semangat, rangkaian bunga dari florist Denpasar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" decoding="async" height="512" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEOp33my-yqVTdE_-sApcxkjYC_KUJ0SFy70EVN1v-9vmdGy0ydqex_6QSK7Qcps4cqbmmhgaXiO_9Z9WLfduAYokgVrEBzRw73nkHhP1DlWHKkbdXKiGGWN7qkf7wzg7NZGAvqTyaNcg8Tgy_F9IKg-gmk9R_P-INVm9DMTGguK9e7XVNsJcY40uSqs0viIRY8a9FfkUGuXaDkrsuDc5M_6_9eLkTot3hWqHn1gKAt5lNH-l73p-A" width="512">
+<span class="absolute top-2 left-2 sm:top-3 sm:left-3 max-w-[calc(100%-1rem)] truncate px-2.5 sm:px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold shadow-sm">Sunflower Bliss 🌻</span>
+<span class="absolute top-3 right-3 hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[14px]">bolt</span>Sameday
+            </span>
+</div>
+<div class="p-3 sm:p-5 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface group-hover:text-primary transition-colors">Buket Bunga Matahari Semangat</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3 sm:line-clamp-none">Simbol keceriaan, wisuda universitas di Bali, dan get well soon.</p>
+<p class="font-label-sm text-label-sm text-primary-container mt-2 hidden sm:flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Estimasi buat: 1-2 Jam
+              </p>
+</div>
+<div class="pt-3 border-t border-surface-container flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Harga</span>
+<span class="font-headline-sm text-[15px] sm:text-headline-sm text-secondary font-bold">Mulai Rp165.000</span>
+</div>
+<a aria-label="Pesan Buket Bunga Matahari Semangat via WhatsApp" class="w-11 h-11 shrink-0 justify-center rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin!%20Mau%20pesan%20Buket%20Bunga%20Matahari%20Semangat%20(Mulai%20Rp165.000)" rel="noopener noreferrer" target="_blank">
+
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="product-item rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group" data-category="bouquet">
+<div class="relative w-full h-40 sm:h-64 overflow-hidden bg-surface-container">
+<img alt="Baby&#x27;s Breath Rainbow, rangkaian bunga dari florist Denpasar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" decoding="async" height="512" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbWMUy-q1xxHMI2oSdZ7ssgCz_bXEvQtRYMI_UQIn15FZ4PE2hcmhB_PZEG-Vr64A2kqSlKrOjZA-2uQsRdjQLdk8GAO6cIxhv4EnPuWRICJ4Cnl320kuGJrVhAbraGw_thF1QMI3RmYayG5_Yr3NM4GZ2t3L_n3QqVbVGo2aOqDboQWo6AHfZ6vCfEMcupLdEEjzWjtVGtalcBCAdL3w6iqApetyzFi0DY4D857B1zmX-Gg5s-7zf" width="512">
+<span class="absolute top-2 left-2 sm:top-3 sm:left-3 max-w-[calc(100%-1rem)] truncate px-2.5 sm:px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold shadow-sm">Korean Style ☁️</span>
+<span class="absolute top-3 right-3 hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-[14px]">bolt</span>Sameday
+            </span>
+</div>
+<div class="p-3 sm:p-5 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface group-hover:text-primary transition-colors">Baby's Breath Rainbow</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3 sm:line-clamp-none">Awan bunga abadi warna pastel manis tahan berbulan-bulan.</p>
+<p class="font-label-sm text-label-sm text-primary-container mt-2 hidden sm:flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Estimasi buat: 1 Jam
+              </p>
+</div>
+<div class="pt-3 border-t border-surface-container flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Harga</span>
+<span class="font-headline-sm text-[15px] sm:text-headline-sm text-secondary font-bold">Mulai Rp145.000</span>
+</div>
+<a aria-label="Pesan Baby&#x27;s Breath Rainbow via WhatsApp" class="w-11 h-11 shrink-0 justify-center rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin!%20Mau%20pesan%20Buket%20Baby's%20Breath%20Pastel%20Rainbow%20(Mulai%20Rp145.000)" rel="noopener noreferrer" target="_blank">
+
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="product-item rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group" data-category="papan">
+<div class="relative w-full h-40 sm:h-64 overflow-hidden bg-surface-container">
+<img alt="Bunga Papan Wedding Estetik, rangkaian bunga dari florist Denpasar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" decoding="async" height="512" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPuBZiMjqsYp4uAT38PWzds5E-rbxSLTBjV3_kpmtox89UV7ylJDvWDLyadCWU2LRceEH-PAqNhW9MjWwZoKElTXMtT0S4TuE0PaVnc3y5Lc05gkT-3U58DDKlsjmRMWEtkEE28vdNNlr9YWjYrPCV-Zj4hCzphegu-Dviv1OpJRVl1NanNrFq6AYMMg0qEk-H7IDOwnUPyxee3aRgZBR2MmQFoRNWeTAFyu58JVyiV_G7DERJHXyh" width="512">
+<span class="absolute top-2 left-2 sm:top-3 sm:left-3 max-w-[calc(100%-1rem)] truncate px-2.5 sm:px-3 py-1 rounded-full bg-primary text-on-primary font-label-sm text-label-sm font-semibold shadow-sm">Modern Foam Board 💍</span>
+<span class="absolute top-3 right-3 hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm font-bold shadow-sm">
+              Area Denpasar
+            </span>
+</div>
+<div class="p-3 sm:p-5 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface group-hover:text-primary transition-colors">Bunga Papan Wedding Estetik</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3 sm:line-clamp-none">Desain kontemporer minimalis elegan untuk resepsi hotel &amp; villa.</p>
+<p class="font-label-sm text-label-sm text-primary-container mt-2 hidden sm:flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Estimasi buat: 3-4 Jam
+              </p>
+</div>
+<div class="pt-3 border-t border-surface-container flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Harga</span>
+<span class="font-headline-sm text-[15px] sm:text-headline-sm text-secondary font-bold">Mulai Rp450.000</span>
+</div>
+<a aria-label="Pesan Bunga Papan Wedding Estetik via WhatsApp" class="w-11 h-11 shrink-0 justify-center rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin!%20Mau%20pesan%20Bunga%20Papan%20Wedding%20Estetik%20(Mulai%20Rp450.000)" rel="noopener noreferrer" target="_blank">
+
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="product-item rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group" data-category="papan">
+<div class="relative w-full h-40 sm:h-64 overflow-hidden bg-surface-container">
+<img alt="Bunga Papan Duka Cita Elegan, rangkaian bunga dari florist Denpasar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" decoding="async" height="512" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoVet-V1H4YSd9LYunn1zR0PdtNmfMH59tLcXi6THFqAfeNAGc-3Pw8hNnV5UGbbV1GjlXqkKj2OgWXZ-WWcjVHEgEEElB3VMz8K2lFbrCpBLfn_Y-TnSFwTqy4X8h0RCN8EH7MnKFaFcUhvT26OjQ3AVd8a3V2-1ml0TOfbpCJn5KnL6rTW-HgpfALrpN5aiq-RGSvRL6kHcTlWNqgXABFhgeOWpsyeCMXO4Uz_YqlRQkGrbJtHDE" width="512">
+<span class="absolute top-2 left-2 sm:top-3 sm:left-3 max-w-[calc(100%-1rem)] truncate px-2.5 sm:px-3 py-1 rounded-full bg-surface-variant text-on-surface font-label-sm text-label-sm font-semibold shadow-sm">Khidmat &amp; Tulus 🕊️</span>
+<span class="absolute top-3 right-3 hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm font-bold shadow-sm">
+              Prioritas Cepat
+            </span>
+</div>
+<div class="p-3 sm:p-5 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface group-hover:text-primary transition-colors">Bunga Papan Duka Cita Elegan</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3 sm:line-clamp-none">Ungkapan belasungkawa terhormat dengan bunga segar putih &amp; hijau.</p>
+<p class="font-label-sm text-label-sm text-primary-container mt-2 hidden sm:flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Siap Antar Express
+              </p>
+</div>
+<div class="pt-3 border-t border-surface-container flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Harga</span>
+<span class="font-headline-sm text-[15px] sm:text-headline-sm text-secondary font-bold">Mulai Rp400.000</span>
+</div>
+<a aria-label="Pesan Bunga Papan Duka Cita Elegan via WhatsApp" class="w-11 h-11 shrink-0 justify-center rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin!%20Mau%20pesan%20Bunga%20Papan%20Duka%20Cita%20(Mulai%20Rp400.000)" rel="noopener noreferrer" target="_blank">
+
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Item 6 -->
+<div class="product-item rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group" data-category="papan">
+<div class="relative w-full h-40 sm:h-64 overflow-hidden bg-surface-container">
+<img alt="Papan Ucapan Sukses Usaha, rangkaian bunga dari florist Denpasar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" decoding="async" height="512" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF7NKljvuIY-EC3ZWrO8demufVHiTLgKbp3l78-9Bk2SNlCdu5OE5QFAD7sTn0is6PniEMi6TMpUY8EEp1NRGC2jnxoyXjW-XmigQAohjVNcugcsEbIusk7ZMR0Vx_nAFEtI_36ZuzMKUQ6htjLmPl7nElsaTvvLYHhar8-0Ixg_kRxfGUWLfkBEvM2KERZI5_Hmj1BZqomSA6dtiYhMokWyf0k2u4nKrjSnVNe9Ioro7Ew7MziKje" width="512">
+<span class="absolute top-2 left-2 sm:top-3 sm:left-3 max-w-[calc(100%-1rem)] truncate px-2.5 sm:px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold shadow-sm">Grand Opening 🎉</span>
+<span class="absolute top-3 right-3 hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm font-bold shadow-sm">
+              Request Teks Papan
+            </span>
+</div>
+<div class="p-3 sm:p-5 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface group-hover:text-primary transition-colors">Papan Ucapan Sukses Usaha</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3 sm:line-clamp-none">Sempurna untuk peresmian kafe, restoran, butik &amp; kantor baru di Bali.</p>
+<p class="font-label-sm text-label-sm text-primary-container mt-2 hidden sm:flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Estimasi buat: 3 Jam
+              </p>
+</div>
+<div class="pt-3 border-t border-surface-container flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Harga</span>
+<span class="font-headline-sm text-[15px] sm:text-headline-sm text-secondary font-bold">Mulai Rp500.000</span>
+</div>
+<a aria-label="Pesan Papan Ucapan Sukses Usaha via WhatsApp" class="w-11 h-11 shrink-0 justify-center rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin!%20Mau%20pesan%20Bunga%20Papan%20Grand%20Opening%20(Mulai%20Rp500.000)" rel="noopener noreferrer" target="_blank">
+
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Item 7 -->
+<div class="product-item rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group" data-category="table">
+<div class="relative w-full h-40 sm:h-64 overflow-hidden bg-surface-container">
+<img alt="Standing Akrilik Balon &amp; Roses, rangkaian bunga dari florist Denpasar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" decoding="async" height="512" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAT0IyGIzVbCv0-ryZH1btBhvdFGacnJ8clmD9vMvJFmhHB-J3Ad5WlWVao7rofyLfiwsez8ACltPqcz5CVcWDEvJdYlTD_7silnvtl808cwCYm5qIwuRdtWCR_yS3WQWZr_aMJ6thotjwiesCJAsIZuBDl8XG3m_h1hZvBkMJLndnZD_0VPXIl2UT6mK5KN4t3Foc4_yK0gt9xprhSNNYY8SEmie9eBCPrcWSHMU7jfDt6-m7nQ7R" width="512">
+<span class="absolute top-2 left-2 sm:top-3 sm:left-3 max-w-[calc(100%-1rem)] truncate px-2.5 sm:px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold shadow-sm">Akrilik Modern 🎈</span>
+<span class="absolute top-3 right-3 hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm font-bold shadow-sm">
+              Mewah Modern
+            </span>
+</div>
+<div class="p-3 sm:p-5 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface group-hover:text-primary transition-colors">Standing Akrilik Balon &amp; Roses</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3 sm:line-clamp-none">Desain eye-catching kekinian untuk pameran, birthday party &amp; wisuda.</p>
+<p class="font-label-sm text-label-sm text-primary-container mt-2 hidden sm:flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Estimasi buat: 2-3 Jam
+              </p>
+</div>
+<div class="pt-3 border-t border-surface-container flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Harga</span>
+<span class="font-headline-sm text-[15px] sm:text-headline-sm text-secondary font-bold">Mulai Rp380.000</span>
+</div>
+<a aria-label="Pesan Standing Akrilik Balon &amp; Roses via WhatsApp" class="w-11 h-11 shrink-0 justify-center rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin!%20Mau%20pesan%20Standing%20Flower%20Akrilik%20(Mulai%20Rp380.000)" rel="noopener noreferrer" target="_blank">
+
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Item 8 -->
+<div class="product-item rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group" data-category="table">
+<div class="relative w-full h-40 sm:h-64 overflow-hidden bg-surface-container">
+<img alt="Bunga Keranjang Meja Rustic, rangkaian bunga dari florist Denpasar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" decoding="async" height="512" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkjiYqQIHHNGl4BwJwZrLeXYb_W19uEH6qxBTvhHSMjHAoBEvP1IPt9CPTFgxEM7fJN7B3Uds_QJ--5f29HYnMswOlSc0afmffxfQL_IIE3w3nI51JAdQDiAgA8Z2lqEkDDYlaFovO9FapiwJKKrY8uTqFzbdc03eKI73Rt-O5FWO7BmI6m43HMC1i9wXeKPCz6D0zTQH_uy_yDfbYXqwNUUPSZ9XVIhpeD81XU2vlweUcHnJlYLiK" width="512">
+<span class="absolute top-2 left-2 sm:top-3 sm:left-3 max-w-[calc(100%-1rem)] truncate px-2.5 sm:px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold shadow-sm">Rustic Rattan 🧺</span>
+<span class="absolute top-3 right-3 hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm font-bold shadow-sm">
+              Pemanis Meja
+            </span>
+</div>
+<div class="p-3 sm:p-5 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface group-hover:text-primary transition-colors">Bunga Keranjang Meja Rustic</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3 sm:line-clamp-none">Keranjang rotan khas Bali dengan oasis basah tahan segar 5-7 hari.</p>
+<p class="font-label-sm text-label-sm text-primary-container mt-2 hidden sm:flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Estimasi buat: 1-2 Jam
+              </p>
+</div>
+<div class="pt-3 border-t border-surface-container flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Harga</span>
+<span class="font-headline-sm text-[15px] sm:text-headline-sm text-secondary font-bold">Mulai Rp275.000</span>
+</div>
+<a aria-label="Pesan Bunga Keranjang Meja Rustic via WhatsApp" class="w-11 h-11 shrink-0 justify-center rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin!%20Mau%20pesan%20Bunga%20Keranjang%20Meja%20Rustic%20(Mulai%20Rp275.000)" rel="noopener noreferrer" target="_blank">
+
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Item 9 -->
+<div class="product-item rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group" data-category="bouquet">
+<div class="relative w-full h-40 sm:h-64 overflow-hidden bg-surface-container">
+<img alt="Buket Tulip Holland Import, rangkaian bunga dari florist Denpasar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" decoding="async" height="512" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARv9gWGk8YRnxJiUpxVcDszv-91VkGG7s2yqFvQHYUsS2GyVp3Rxn6IWdgLQPX5yvSgG4ii9O5sp1GCEB3XNWMx9aE54iEMMM4kZqOnfJQGG0k41KoYbnnToWl4xGvk4j6sIdl15_4cGv_I_KzfhdnzBdjZ30dy-tYV6DPM1Mege_bhegu7712NwsQPlf6d2wPc4y1V9l2_OKGlwpc1SOK5rlxek1HYjDmuRtuVGZrriuf3q3kBhWt" width="512">
+<span class="absolute top-2 left-2 sm:top-3 sm:left-3 max-w-[calc(100%-1rem)] truncate px-2.5 sm:px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-semibold shadow-sm">Holland Import 🌷</span>
+<span class="absolute top-3 right-3 hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm font-bold shadow-sm">
+              Pre-order
+            </span>
+</div>
+<div class="p-3 sm:p-5 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface group-hover:text-primary transition-colors">Buket Tulip Holland Import</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3 sm:line-clamp-none">Keanggunan tulip Belanda untuk kejutan romantis.</p>
+<p class="font-label-sm text-label-sm text-primary-container mt-2 hidden sm:flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Estimasi buat: 1 Jam
+              </p>
+</div>
+<div class="pt-3 border-t border-surface-container flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Harga</span>
+<span class="font-headline-sm text-[15px] sm:text-headline-sm text-secondary font-bold">Mulai Rp320.000</span>
+</div>
+<a aria-label="Pesan Buket Tulip Holland Import via WhatsApp" class="w-11 h-11 shrink-0 justify-center rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin!%20Mau%20pesan%20Buket%20Tulip%20Holland%20Import%20(Mulai%20Rp320.000)" rel="noopener noreferrer" target="_blank">
+
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Item 10 -->
+<div class="product-item rounded-3xl bg-surface-container-lowest overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group" data-category="table">
+<div class="relative w-full h-40 sm:h-64 overflow-hidden bg-surface-container">
+<img alt="Bloom Box Eksklusif &amp; Cokelat, rangkaian bunga dari florist Denpasar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" decoding="async" height="512" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNiOB4pa5O6m_v8EoDt-wE5vdKPPfuseyAv7FJFI8uxwCigOSvV_p2VfXU9N6OVlmi8owI9czKMkXwhCAAlOji3CUh1V1WP-_Us-O0ItfMJykCSFvLuwXqrCfCNSHM0s0EeNfNA_9T4Ze_4Aqq1J941va6d5rLECNb1fOxgZ9cLRS_MKpvraPbyGLewNqrtPUCiseJNNH058HrVdfGmyPjUV-YmKkgfGi13s3YJeHKZc1hmIX8asVs" width="512">
+<span class="absolute top-2 left-2 sm:top-3 sm:left-3 max-w-[calc(100%-1rem)] truncate px-2.5 sm:px-3 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-semibold shadow-sm">Bloom Box &amp; Choco 🍫</span>
+<span class="absolute top-3 right-3 hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-primary font-label-sm text-label-sm font-bold shadow-sm">
+              Surprise Gift
+            </span>
+</div>
+<div class="p-3 sm:p-5 flex flex-col flex-grow justify-between space-y-3">
+<div>
+<h3 class="font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface group-hover:text-primary transition-colors">Bloom Box Eksklusif &amp; Cokelat</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-3 sm:line-clamp-none">Kotak beludru elegan berisi bunga segar rapat &amp; cokelat manis premium.</p>
+<p class="font-label-sm text-label-sm text-primary-container mt-2 hidden sm:flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Estimasi buat: 1-2 Jam
+              </p>
+</div>
+<div class="pt-3 border-t border-surface-container flex items-center justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Harga</span>
+<span class="font-headline-sm text-[15px] sm:text-headline-sm text-secondary font-bold">Mulai Rp290.000</span>
+</div>
+<a aria-label="Pesan Bloom Box Eksklusif &amp; Cokelat via WhatsApp" class="w-11 h-11 shrink-0 justify-center rounded-full bg-primary-container hover:bg-primary text-on-primary font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm transition-transform active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin!%20Mau%20pesan%20Bloom%20Box%20Eksklusif%20(Mulai%20Rp290.000)" rel="noopener noreferrer" target="_blank">
+
+<span class="material-symbols-outlined text-[16px]">chat</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CARA ORDER (4 Langkah Manis) & FAQ LOKAL ACCORDION -->
+<section class="w-full py-12 md:py-space-2xl px-margin-mobile md:px-margin bg-surface-container-low" id="cara-order">
+<div class="max-w-7xl mx-auto space-y-space-2xl">
+<!-- 4 Langkah Order -->
+<div class="space-y-space-lg">
+<div class="text-center max-w-xl mx-auto space-y-2" data-stagger>
+<span class="px-3.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold uppercase tracking-wider">Super Mudah &amp; Cepat</span>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">4 Langkah Mudah Pesan Bunga</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Dari pemilihan buket hingga sampai di tangan orang tersayang tanpa ribet.</p>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6" data-stagger="zoom">
+<!-- Step 1 -->
+<div class="p-4 sm:p-6 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col items-center text-center space-y-3 relative group hover:-translate-y-1 transition-transform">
+<span class="absolute top-4 right-4 text-xs font-bold text-secondary font-mono">01</span>
+<div class="step-icon w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]">search</span>
+</div>
+<h3 class="font-headline-sm text-[17px] leading-snug sm:text-headline-sm text-on-surface">Pilih Bunga Cantik</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pilih dari katalog favorit atau custom tema warna bunga sesuai impian Anda.</p>
+</div>
+<!-- Step 2 -->
+<div class="p-4 sm:p-6 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col items-center text-center space-y-3 relative group hover:-translate-y-1 transition-transform">
+<span class="absolute top-4 right-4 text-xs font-bold text-primary font-mono">02</span>
+<div class="step-icon w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]">edit_note</span>
+</div>
+<h3 class="font-headline-sm text-[17px] leading-snug sm:text-headline-sm text-on-surface">Isi Info &amp; Ucapan</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cantumkan nama penerima, alamat Denpasar, jam kirim, serta teks kartu manis.</p>
+</div>
+<!-- Step 3 -->
+<div class="p-4 sm:p-6 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col items-center text-center space-y-3 relative group hover:-translate-y-1 transition-transform">
+<span class="absolute top-4 right-4 text-xs font-bold text-tertiary font-mono">03</span>
+<div class="step-icon w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]">chat</span>
+</div>
+<h3 class="font-headline-sm text-[17px] leading-snug sm:text-headline-sm text-on-surface">Konfirmasi WA &amp; Bayar</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Admin mengonfirmasi ketersediaan, mengirim foto pra-kirim, pembayaran via QRIS / BCA.</p>
+</div>
+<!-- Step 4 -->
+<div class="p-4 sm:p-6 rounded-3xl bg-surface-container-lowest shadow-sm flex flex-col items-center text-center space-y-3 relative group hover:-translate-y-1 transition-transform">
+<span class="absolute top-4 right-4 text-xs font-bold text-emerald-600 font-mono">04</span>
+<div class="step-icon w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center text-emerald-700 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]">moped</span>
+</div>
+<h3 class="font-headline-sm text-[17px] leading-snug sm:text-headline-sm text-on-surface">Diantar Driver Aman</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Kurir kami mengantar langsung dengan kemasan pelindung agar bunga tiba dalam kondisi cantik.</p>
+</div>
+</div>
+</div>
+<!-- FAQ Section Accordion -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start pt-6" id="faq-section">
+<div class="lg:col-span-5 space-y-4" data-reveal="left">
+<span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">Tanya Jawab Florist</span>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">
+            Pertanyaan Seputar Pemesanan di Denpasar
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Punya kebutuhan khusus atau pengiriman mendadak? Hubungi kami langsung melalui WhatsApp untuk konsultasi cepat.
+          </p>
+<div class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[20px]">support_agent</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Butuh respon kilat?</p>
+<a class="font-label-sm text-label-sm text-primary hover:underline font-semibold" href="https://wa.me/6281234567890" rel="noopener noreferrer" target="_blank">Konsultasi WA +62 812-3456-7890</a>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7 space-y-3" data-stagger id="faqAccordion">
+<!-- FAQ 1 -->
+<div class="faq-item rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm">
+<button class="faq-toggle w-full px-4 sm:px-6 py-4 min-h-[56px] text-left flex items-center justify-between gap-4 font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface hover:text-primary transition-colors" type="button">
+<span class="">Bisa order mendadak / butuh dikirim dalam 2-3 jam?</span>
+<span aria-hidden="true" class="faq-icon material-symbols-outlined text-primary text-[20px] transition-transform duration-300">expand_more</span>
+</button>
+<div class="faq-content px-4 sm:px-6 pb-5 font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+<p class=""><strong>Bisa diusahakan.</strong> Pesanan mendadak bisa kami usahakan, tergantung stok bunga, jenis rangkaian, dan jarak pengiriman. Pilih slot "Same-Day Urgent" di planner atau chat WhatsApp langsung agar kami cek ketersediaannya lebih dulu.</p>
+</div>
+</div>
+<!-- FAQ 2 -->
+<div class="faq-item rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm">
+<button class="faq-toggle w-full px-4 sm:px-6 py-4 min-h-[56px] text-left flex items-center justify-between gap-4 font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface hover:text-primary transition-colors" type="button">
+<span class="">Area pengiriman mana saja yang dicakup?</span>
+<span aria-hidden="true" class="faq-icon material-symbols-outlined text-primary text-[20px] transition-transform duration-300">expand_more</span>
+</button>
+<div class="faq-content px-4 sm:px-6 pb-5 font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+<p class="">Kami melayani pengiriman ke <strong>seluruh wilayah Kota Denpasar</strong> (Renon, Sanur, Panjer, Teuku Umar, Gatot Subroto, Sesetan, Kesiman, Ubung, Pemogan) serta kawasan sekitar seperti Badung (Kuta, Legian, Seminyak, Kerobokan, Canggu, Jimbaran, Nusa Dua, dan Ubud Selatan).</p>
+</div>
+</div>
+<!-- FAQ 3 -->
+<div class="faq-item rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm">
+<button class="faq-toggle w-full px-4 sm:px-6 py-4 min-h-[56px] text-left flex items-center justify-between gap-4 font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface hover:text-primary transition-colors" type="button">
+<span class="">Jam operasional toko dan jadwal kurir pengiriman?</span>
+<span aria-hidden="true" class="faq-icon material-symbols-outlined text-primary text-[20px] transition-transform duration-300">expand_more</span>
+</button>
+<div class="faq-content px-4 sm:px-6 pb-5 font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+<p class="">Atelier kami buka <strong>setiap hari (Senin - Minggu) pukul 07.00 - 22.00 WITA</strong>. Jadwal kloter pengiriman kurir bunga dimulai sejak pukul 08.00 pagi sampai pukul 20.00 malam. Khusus pesanan surprise subuh atau tengah malam bisa diatur H-1.</p>
+</div>
+</div>
+<!-- FAQ 4 -->
+<div class="faq-item rounded-2xl bg-surface-container-lowest overflow-hidden shadow-sm">
+<button class="faq-toggle w-full px-4 sm:px-6 py-4 min-h-[56px] text-left flex items-center justify-between gap-4 font-headline-sm text-[16px] leading-snug sm:text-headline-sm text-on-surface hover:text-primary transition-colors" type="button">
+<span class="">Apakah kartu ucapan dan foto hasil sebelum kirim sudah termasuk?</span>
+<span aria-hidden="true" class="faq-icon material-symbols-outlined text-primary text-[20px] transition-transform duration-300">expand_more</span>
+</button>
+<div class="faq-content px-4 sm:px-6 pb-5 font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+<p class=""><strong>Kartu ucapan gratis.</strong> Setiap buket, bloom box, dan bunga papan sudah termasuk kartu ucapan. Kami juga mengirim foto hasil rangkaian ke WhatsApp Anda untuk konfirmasi sebelum kurir berangkat.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- KONTAK, LOKASI & PETA DENPASAR -->
+<section class="w-full py-12 md:py-space-2xl px-margin-mobile md:px-margin bg-surface" id="lokasi-section">
+<div class="max-w-7xl mx-auto space-y-space-xl">
+<div class="text-center max-w-xl mx-auto space-y-2" data-stagger>
+<span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-semibold">Kunjungi Studio Kami</span>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Lokasi Studio &amp; Kontak</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Mampir langsung untuk memilih bunga segar favorit Anda atau konsultasi konsep bunga papan secara santai.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+<!-- Info Detail Card -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-5 sm:p-8 rounded-3xl shadow-md space-y-6" data-reveal="left">
+<div class="space-y-1">
+<h3 class="font-headline-sm text-headline-sm text-primary">Denpasar Bloom Atelier</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Boutique Florist Studio Bali</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Alamat Outlet Studio</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Jl. Contoh No. 00, Renon, Denpasar Selatan, Kota Denpasar, Bali 80226</p>
+<p class="font-label-sm text-label-sm text-secondary font-medium mt-0.5">(Dekat Lapangan Renon &amp; Bajra Sandhi)</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined text-[18px]">nest_clock_farsight_analog</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Jam Operasional</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Buka Setiap Hari • 07.00 - 22.00 WITA</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[18px]">call</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Hotline WhatsApp / Telepon</p>
+<a class="font-body-sm text-body-sm text-primary font-bold hover:underline" href="https://wa.me/6281234567890">+62 812-3456-7890</a>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary shrink-0">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Instagram &amp; TikTok</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">@denpasarbloom</p>
+</div>
+</div>
+</div>
+<a class="block w-full py-3.5 px-4 rounded-full bg-surface-container-high hover:bg-surface-container-highest text-center font-label-lg text-label-lg text-primary font-semibold transition-colors" href="https://wa.me/6281234567890?text=Halo%20Admin%20Denpasar%20Bloom,%20bisa%20minta%20share%20lokasi%20toko?" rel="noopener noreferrer" target="_blank">
+            Petunjuk Arah &amp; Share Lokasi WA
+          </a>
+</div>
+<!-- Visual Map Section (Static Map Data-Location with Floating Markers) -->
+<div class="lg:col-span-7 relative" data-reveal="right" data-delay="150">
+<div class="w-full min-h-[26rem] md:h-96 gap-3 rounded-3xl bg-cover bg-center bg-surface-container shadow-md relative overflow-hidden flex flex-col justify-between p-4" data-location="Renon, Denpasar, Bali" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDlYqau-Q7FXULBmQsozaI0-FGRDp46eUgSSxpHJTq5FMBLGx2EDS5RA2b9GPJMJeSv_iZgTpXuexNOA-EXpjjZfnQeIvp4LZeM8t7gEGPYvP6xS6Tpjwnwp54uXNuddrumsJkKPx7K8wjveRvzDlIpkUBTBhRaAeFxyvnU5r_Cv_rXa5QvFGYeXhtN9F9CU0QKDaE2o4ahasmSnpHVJba8I-CfCqqts0HegE3RRji3P8kbWxW19ZLF')">
+<!-- Map Overlay Gradients for soft aesthetic feel -->
+<div class="absolute inset-0 bg-primary/10 backdrop-blur-[0.5px]"></div>
+<!-- Top Coverage Pill Banner -->
+<div class="relative z-10 flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-surface-container-lowest/95 backdrop-blur-md text-on-surface font-label-sm text-label-sm font-bold shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-primary">local_shipping</span> Jangkauan Pengiriman:
+              </span>
+<span class="px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-sm text-[11px] font-semibold">Renon</span>
+<span class="px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-sm text-[11px] font-semibold">Sanur</span>
+<span class="px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-sm text-[11px] font-semibold">Gatsu</span>
+<span class="px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-sm text-[11px] font-semibold">Ubung</span>
+<span class="px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-sm text-[11px] font-semibold">Canggu</span>
+</div>
+<!-- Central Custom Studio Marker Card -->
+<div class="relative z-10 self-center w-full sm:w-auto bg-surface-container-lowest/95 backdrop-blur-md p-4 rounded-2xl shadow-xl flex items-center gap-3 max-w-sm">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]">storefront</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md font-bold text-on-surface truncate">Denpasar Bloom Atelier</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Jl. Contoh No. 00, Renon</p>
+<p class="font-label-sm text-label-sm text-primary font-semibold">Buka 07.00 - 22.00 WITA</p>
+</div>
+</div>
+<!-- Bottom reassurance pill -->
+<div class="relative z-10 self-end bg-surface-container-lowest/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-on-surface font-label-sm text-label-sm flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary">favorite</span>
+<span class="">Melayani Denpasar &amp; sekitarnya</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TOMBOL WHATSAPP MENGAMBANG (aman untuk notch/home-bar HP) -->
+<div class="fixed right-4 sm:right-6 bottom-[calc(1rem+env(safe-area-inset-bottom))] sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom))] z-40 flex items-center gap-2">
+<div class="hidden md:flex flex-col items-end bg-surface-container-lowest px-3 py-1.5 rounded-full shadow-lg border border-primary-fixed">
+<span class="font-label-sm text-label-sm font-bold text-primary">Tanya via WhatsApp</span>
+<span class="font-label-sm text-[10px] text-on-surface-variant">Dibalas pada jam operasional</span>
+</div>
+<a aria-label="Order via WhatsApp" class="relative w-14 h-14 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-[0_8px_24px_rgba(54,90,63,0.4)] hover:bg-primary-container transition-all transform hover:scale-110 active:scale-95" href="https://wa.me/6281234567890?text=Halo%20Admin%20Denpasar%20Bloom%20Atelier!%20Saya%20ingin%20tanya%20pesanan%20bunga%20%F0%9F%8C%B8" rel="noopener noreferrer" target="_blank">
+<span aria-hidden="true" class="absolute inset-0 rounded-full bg-primary/40 animate-ping motion-reduce:hidden"></span>
+<span class="material-symbols-outlined text-[30px] relative">chat</span>
+</a>
+</div>
+<!-- LOGIKA HALAMAN: konfigurasi klien ada di bagian atas script -->
+<script>
+(function () {
+  'use strict';
+  function boot() {
+
+  /* ================= KONFIGURASI KLIEN (ganti di sini) =================
+     Catatan: nomor WA juga tertulis di href tombol (untuk pengunjung tanpa JS).
+     Saat go-live, Find & Replace "6281234567890" dan "+62 812-3456-7890" di file ini. */
+  var BIZ = {
+    wa: '6281234567890',
+    greeting: 'Halo Admin Denpasar Bloom Atelier!',
+    pickupPlace: 'Studio Renon, Denpasar'
+  };
+  /* ==================================================================== */
+
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(s, c) { return (c || document).querySelector(s); }
+  function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+
+  /* ---------- Satu sumber nomor WhatsApp ---------- */
+  $$('a[href*="wa.me/"]').forEach(function (a) {
+    a.setAttribute('href', a.getAttribute('href').replace(/wa\.me\/\d+/, 'wa.me/' + BIZ.wa));
+  });
+
+  /* ---------- Header: bayangan saat scroll, menu mobile, scrollspy ---------- */
+  var header = $('#siteHeader');
+  var menuBtn = $('#menuToggle');
+  var menu = $('#mobileMenu');
+  var scrim = $('#menuScrim');
+
+  function setMenu(open) {
+    if (!menu || !menuBtn) return;
+    menu.classList.toggle('open', open);
+    if (scrim) scrim.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
+    var ic = $('.material-symbols-outlined', menuBtn);
+    if (ic) ic.textContent = open ? 'close' : 'menu';
+  }
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
+    if (scrim) scrim.addEventListener('click', function () { setMenu(false); });
+    $$('a', menu).forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+    window.addEventListener('resize', function () { if (window.innerWidth >= 1024) setMenu(false); });
+  }
+
+  var spyIds = ['beranda', 'planner-section', 'katalog-section', 'faq-section', 'lokasi-section'];
+  var spyLinks = $$('[data-nav]');
+  var ticking = false;
+  function onScroll() {
+    if (header) header.classList.toggle('is-scrolled', window.scrollY > 8);
+    var current = spyIds[0];
+    spyIds.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 140) current = id;
+    });
+    spyLinks.forEach(function (a) { a.classList.toggle('is-active', a.getAttribute('data-nav') === current); });
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  /* ---------- Animasi masuk saat scroll ---------- */
+  function show(el) { el.classList.add('is-visible'); }
+  try {
+    $$('[data-stagger]').forEach(function (c) {
+      var mode = c.getAttribute('data-stagger') || 'up';
+      var grid = mode === 'grid';
+      var base = parseInt(c.getAttribute('data-delay') || '0', 10);
+      Array.prototype.forEach.call(c.children, function (el, i) {
+        if (!el.hasAttribute('data-reveal')) el.setAttribute('data-reveal', grid ? 'up' : mode);
+        var d = grid ? (i % 4) * 90 : i * 110;
+        el.style.setProperty('--rd', (base + d) + 'ms');
+      });
+    });
+    $$('[data-reveal][data-delay]').forEach(function (el) {
+      el.style.setProperty('--rd', el.getAttribute('data-delay') + 'ms');
+    });
+    var targets = $$('[data-reveal]');
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      targets.forEach(show);
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { show(en.target); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+      targets.forEach(function (t) { io.observe(t); });
+    }
+  } catch (err) {
+    root.classList.remove('js'); // jika animasi gagal, tampilkan semua konten apa adanya
+    if (window.console) console.error(err);
+  }
+
+  /* ---------- Planner pesanan -> WhatsApp ---------- */
+  var method = 'delivery';
+  var selectedCategory = 'Hand Bouquet Pastel';
+  var selectedArea = 'Denpasar Selatan (Sanur, Renon, Sidakarya)';
+
+  var fulfillBtns = $$('.fulfillment-btn');
+  var areaSection = $('#deliveryAreaSection');
+  var pickupBox = $('#pickupCalloutSection');
+  var deliverySlotWrap = $('#deliveryTimeSlotWrapper');
+  var pickupSlotWrap = $('#pickupTimeSlotWrapper');
+  var dateLabel = $('#dateLabel');
+  var senderLabel = $('#senderLabel');
+  var recipientLabel = $('#recipientLabel');
+  var catBtns = $$('.planner-cat-btn');
+  var areaBtns = $$('.planner-area-btn');
+  var dateInput = $('#deliveryDate');
+  var timeSelect = $('#timeSlot');
+  var pickupSelect = $('#pickupTimeSlot');
+  var senderInput = $('#senderName');
+  var recipientInput = $('#recipientName');
+  var cardInput = $('#cardMessage');
+  var counter = $('#charCount');
+  var preview = $('#previewContent');
+  var sendBtn = $('#sendWhatsAppBtn');
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function localISO(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  if (dateInput) { // pakai tanggal LOKAL (toISOString memakai UTC dan bisa mundur sehari di pagi hari WITA)
+    var todayISO = localISO(new Date());
+    dateInput.value = todayISO;
+    dateInput.min = todayISO;
+  }
+  function prettyDate(v) {
+    if (!v) return 'Hari ini';
+    var p = v.split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2]);
+    try { return d.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }); }
+    catch (e) { return v; }
+  }
+
+  function buildMessage() {
+    var date = prettyDate(dateInput && dateInput.value);
+    var sender = senderInput && senderInput.value.trim() ? senderInput.value.trim() : '(belum diisi)';
+    var recip = recipientInput && recipientInput.value.trim() ? recipientInput.value.trim() : '-';
+    var card = cardInput && cardInput.value.trim() ? cardInput.value.trim() : '(belum diisi / menyusul)';
+    if (method === 'delivery') {
+      return BIZ.greeting + ' Saya mau pesan bunga:\n' +
+        '- Metode: Delivery (diantar kurir)\n' +
+        '- Kategori: ' + selectedCategory + '\n' +
+        '- Area kirim: ' + selectedArea + '\n' +
+        '- Tanggal kirim: ' + date + '\n' +
+        '- Slot waktu: ' + (timeSelect ? timeSelect.value : '-') + '\n' +
+        '- Nama pengirim: ' + sender + '\n' +
+        '- Nama & kontak penerima: ' + recip + '\n' +
+        '- Kartu ucapan: "' + card + '"\n\n' +
+        'Bisa dibantu cek ketersediaan dan total biayanya ya kak? Terima kasih! 💕';
+    }
+    return BIZ.greeting + ' Saya mau pesan bunga:\n' +
+      '- Metode: Self pick up (ambil di studio)\n' +
+      '- Kategori: ' + selectedCategory + '\n' +
+      '- Lokasi ambil: ' + BIZ.pickupPlace + '\n' +
+      '- Tanggal ambil: ' + date + '\n' +
+      '- Jam pengambilan: ' + (pickupSelect ? pickupSelect.value : '-') + ' WITA\n' +
+      '- Nama pemesan: ' + sender + '\n' +
+      '- Kontak pengambil: ' + recip + '\n' +
+      '- Kartu ucapan: "' + card + '"\n\n' +
+      'Bisa dibantu siapkan pesanan sesuai jam di atas ya kak? Terima kasih! 💕';
+  }
+
+  function updatePreview(flash) {
+    var msg = buildMessage();
+    if (preview) {
+      preview.textContent = msg;
+      if (flash && !reduceMotion) {
+        preview.classList.remove('bubble-flash');
+        void preview.offsetWidth; // restart animasi
+        preview.classList.add('bubble-flash');
+      }
+    }
+    return msg;
+  }
+
+  function setPressed(list, active, onCls, offCls) {
+    list.forEach(function (b) {
+      var on = b === active;
+      b.setAttribute('aria-pressed', String(on));
+      onCls.forEach(function (c) { b.classList.toggle(c, on); });
+      offCls.forEach(function (c) { b.classList.toggle(c, !on); });
+    });
+  }
+
+  fulfillBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      method = btn.getAttribute('data-method');
+      setPressed(fulfillBtns, btn, ['bg-primary', 'text-on-primary', 'shadow-sm'], ['text-on-surface', 'hover:bg-surface-container-high']);
+      var del = method === 'delivery';
+      areaSection.classList.toggle('hidden', !del);
+      pickupBox.classList.toggle('hidden', del);
+      deliverySlotWrap.classList.toggle('hidden', !del);
+      pickupSlotWrap.classList.toggle('hidden', del);
+      if (dateLabel) dateLabel.textContent = del ? '3. Tanggal Pengiriman 📅' : '3. Tanggal Pengambilan di Studio 📅';
+      if (senderLabel) senderLabel.textContent = del ? 'Nama Anda (Pengirim)' : 'Nama Anda (Pemesan)';
+      if (recipientLabel) recipientLabel.textContent = del ? 'Nama Penerima & No. HP' : 'Nama & No. HP Pengambil';
+      updatePreview(true);
+    });
+  });
+
+  catBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setPressed(catBtns, btn, ['bg-primary', 'text-on-primary', 'shadow-sm'], ['bg-surface-container', 'text-on-surface', 'hover:bg-surface-container-high']);
+      catBtns.forEach(function (b) {
+        var ic = $('.material-symbols-outlined', b);
+        if (ic) { ic.classList.toggle('text-on-primary', b === btn); ic.classList.toggle('text-primary', b !== btn); }
+      });
+      selectedCategory = btn.getAttribute('data-val');
+      updatePreview(true);
+    });
+  });
+
+  areaBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setPressed(areaBtns, btn, ['bg-secondary', 'text-on-secondary'], ['bg-surface-container', 'text-on-surface', 'hover:bg-surface-container-high']);
+      selectedArea = btn.getAttribute('data-area');
+      updatePreview(true);
+    });
+  });
+
+  [dateInput, timeSelect, pickupSelect].forEach(function (el) { if (el) el.addEventListener('change', function () { updatePreview(true); }); });
+  [senderInput, recipientInput].forEach(function (el) { if (el) el.addEventListener('input', function () { updatePreview(false); }); });
+  if (cardInput) {
+    cardInput.addEventListener('input', function () {
+      if (counter) counter.textContent = cardInput.value.length + ' / 200';
+      updatePreview(false);
+    });
+  }
+  if (sendBtn) {
+    sendBtn.addEventListener('click', function () {
+      var url = 'https://wa.me/' + BIZ.wa + '?text=' + encodeURIComponent(updatePreview(false));
+      var w = window.open(url, '_blank'); // (jangan pakai fitur 'noopener': window.open lalu selalu null dan halaman ikut berpindah)
+      if (w) { try { w.opener = null; } catch (e) {} }
+      else { window.location.href = url; } // popup diblokir browser HP -> buka di tab yang sama
+    });
+  }
+  updatePreview(false);
+
+  /* ---------- Filter katalog ---------- */
+  var filterBtns = $$('.catalog-filter');
+  var items = $$('.product-item');
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var f = btn.getAttribute('data-filter');
+      setPressed(filterBtns, btn, ['bg-primary', 'text-on-primary'], ['text-on-surface-variant', 'hover:bg-surface-container']);
+      var n = 0;
+      items.forEach(function (it) {
+        var ok = f === 'all' || it.getAttribute('data-category') === f;
+        it.classList.toggle('hidden', !ok);
+        if (ok) {
+          it.classList.add('is-visible');
+          if (!reduceMotion) {
+            it.style.setProperty('--rd', (n % 4) * 60 + 'ms');
+            it.classList.remove('is-pop'); void it.offsetWidth; it.classList.add('is-pop');
+          }
+          n++;
+        }
+      });
+    });
+  });
+
+  /* ---------- FAQ accordion ---------- */
+  var faqItems = $$('.faq-item');
+  faqItems.forEach(function (item, i) {
+    var btn = $('.faq-toggle', item);
+    var panel = $('.faq-content', item);
+    var id = 'faq-panel-' + (i + 1);
+    panel.id = id;
+    btn.setAttribute('aria-controls', id);
+    btn.setAttribute('aria-expanded', 'false');
+    btn.addEventListener('click', function () {
+      var wasOpen = item.classList.contains('open');
+      faqItems.forEach(function (o) {
+        o.classList.remove('open');
+        $('.faq-toggle', o).setAttribute('aria-expanded', 'false');
+      });
+      if (!wasOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+  if (faqItems.length) { faqItems[0].classList.add('open'); $('.faq-toggle', faqItems[0]).setAttribute('aria-expanded', 'true'); }
+
+  /* ---------- Gambar rusak: sembunyikan ikon "broken image" ---------- */
+  $$('img').forEach(function (img) {
+    function bad() { img.classList.add('img-fallback'); }
+    img.addEventListener('error', bad);
+    if (img.complete && img.naturalWidth === 0 && img.getAttribute('src')) bad(); // sudah gagal sebelum script jalan
+  });
+  }
+  // Script ini berada di dalam <main>, sedangkan footer dibuat sesudahnya: tunggu DOM selesai dimuat.
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+</script>
+</div></main><footer class="w-full bg-surface-container-low mt-0 text-on-surface relative overflow-hidden"><div class="w-full bg-gradient-to-r from-secondary-fixed via-primary-fixed to-secondary-fixed py-2.5 px-margin-mobile md:px-margin flex items-center justify-center gap-3 text-center"><span class="material-symbols-outlined text-secondary text-[18px]">local_florist</span><p class="font-label-md text-label-md text-on-secondary-fixed font-semibold tracking-wide uppercase">Handcrafted with Love di Denpasar • Antar ke Sanur, Renon, Canggu &amp; sekitarnya</p><span class="material-symbols-outlined text-secondary text-[18px]">local_florist</span></div><div class="max-w-7xl mx-auto px-margin-mobile md:px-margin py-12 pb-28 md:py-space-2xl"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl" data-stagger><div class="space-y-3"><div class="flex items-center gap-2"><img alt="Logo Denpasar Bloom Atelier" class="h-8 w-auto object-contain" height="32" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkkU5J5eZNvLfeCClhllctnRgEMQWpbxECjoIx2s6d1yu4p4vEvWBCR2uXwK2XSveWDKTDlwGXp9YNBizC8hcosIwQjwQR-xOo4TBi1_l1Agn7tR6hjrt860lGOLo0r8hf8JaIKtSazEdT8EzVxM7D0WwlcgDdw5PQGxam5diBNYeerjbusXqGe_bsV3mZ_bXOuy-2b9BWYtLsw0v_vRkKZrrvtLaZJN-1U5_loJf1AAhtfpOvpR9W" width="32"><span class="font-headline-sm text-headline-sm text-primary">Denpasar Bloom</span></div><p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">Boutique florist modern bernuansa tropis Bali. Kami merangkai keindahan alam segar untuk momen selebrasi, ungkapan cinta, dan apresiasi tulus Anda.</p><div class="flex items-center gap-2 pt-1"><span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm">Same-Day Delivery</span><span class="px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">Bespoke Decor</span></div></div><div class="space-y-3"><h4 class="font-headline-sm text-headline-sm text-primary">Lokasi Studio</h4><div class="flex items-start gap-2 text-on-surface-variant font-body-sm text-body-sm"><span class="material-symbols-outlined text-primary text-[18px] shrink-0 mt-0.5">location_on</span><p class="">Jl. Contoh No. 00, Renon, Denpasar Selatan, Kota Denpasar, Bali 80226</p></div><div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm"><span class="material-symbols-outlined text-primary text-[18px] shrink-0">near_me</span><p class="">Jangkauan Pengiriman: Denpasar, Sanur, Kuta, Seminyak, Canggu &amp; sekitarnya</p></div></div><div class="space-y-3"><h4 class="font-headline-sm text-headline-sm text-primary">Jam Operasional</h4><div class="flex items-start gap-2 text-on-surface-variant font-body-sm text-body-sm"><span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5">nest_clock_farsight_analog</span><div><p class="font-semibold text-on-surface">Senin - Minggu (Buka Tiap Hari)</p><p class="">07.00 - 22.00 WITA</p><p class="font-label-sm text-label-sm text-secondary mt-1">*Layanan Same-Day cut off pukul 19.00 WITA</p></div></div></div><div class="space-y-3"><h4 class="font-headline-sm text-headline-sm text-primary">Hubungi &amp; Ikuti Kami</h4><p class="font-body-sm text-body-sm text-on-surface-variant">Dapatkan inspirasi rangkaian bunga terbaru setiap hari di kanal sosial kami:</p><div class="flex flex-col gap-2"><a class="inline-flex items-center gap-2.5 font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors" href="https://instagram.com/" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">photo_camera</span><span class="">@denpasarbloom</span></a><a class="inline-flex items-center gap-2.5 font-label-lg text-label-lg text-on-surface-variant hover:text-primary transition-colors" href="https://tiktok.com/" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">play_circle</span><span class="">TikTok @denpasarbloom</span></a><a class="inline-flex items-center gap-2.5 font-label-lg text-label-lg text-primary hover:text-primary-container font-semibold transition-colors" href="https://wa.me/6281234567890" rel="noopener noreferrer" target="_blank"><span class="material-symbols-outlined text-[18px]">chat</span><span class="">WhatsApp: +62 812-3456-7890</span></a></div></div></div><div class="mt-space-xl pt-space-md border-t border-outline-variant/30 flex flex-col sm:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-body-sm text-body-sm"><p class="">© 2026 Denpasar Bloom Atelier. Hak cipta dilindungi undang-undang.</p><p class="text-center sm:text-right" id="demoNote">Contoh tampilan website oleh JC Flow Media. Nama, harga, dan kontak hanyalah ilustrasi.</p></div></div></footer>
+
+
+</body></html>
